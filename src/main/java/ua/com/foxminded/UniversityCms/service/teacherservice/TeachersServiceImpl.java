@@ -1,11 +1,13 @@
 package ua.com.foxminded.UniversityCms.service.teacherservice;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ua.com.foxminded.UniversityCms.dao.teacher.TeacherRepository;
 import ua.com.foxminded.UniversityCms.model.Teacher;
 
 import java.util.List;
 
+@Service
 public class TeachersServiceImpl implements TeachersService{
     @Autowired
     private TeacherRepository teacherRepository;

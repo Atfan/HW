@@ -1,11 +1,13 @@
 package ua.com.foxminded.UniversityCms.service.subjectservice;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ua.com.foxminded.UniversityCms.dao.subject.SubjectRepository;
 import ua.com.foxminded.UniversityCms.model.Subject;
 
 import java.util.List;
 
+@Service
 public class SubjectServiceImpl implements SubjectService{
 
     @Autowired

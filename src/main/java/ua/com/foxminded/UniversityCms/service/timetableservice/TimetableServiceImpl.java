@@ -1,11 +1,16 @@
 package ua.com.foxminded.UniversityCms.service.timetableservice;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ua.com.foxminded.UniversityCms.dao.timetable.TimetableRepository;
+import ua.com.foxminded.UniversityCms.model.Student;
 import ua.com.foxminded.UniversityCms.model.Timetable;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class TimetableServiceImpl implements TimetableService{
 
     @Autowired
@@ -41,5 +46,15 @@ public class TimetableServiceImpl implements TimetableService{
     @Override
     public void deleteAll() {
         timetableRepository.deleteAll();
+    }
+
+    @Override
+    public List<Timetable> findDayTimetableForStudent(long id) {
+        try {
+            return timetableRepository.findDayTimetableForStudent(id);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return new ArrayList<>();
+        }
     }
 }

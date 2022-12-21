@@ -36,4 +36,17 @@ public class Timetable {
     @ManyToOne
     @JoinColumn(name = "teacher_id", nullable=false)
     private Teacher teacherId;
+
+    @Override
+    public String toString() {
+        return '\n' + "Timetable{" +
+                "id=" + id +
+                ", dateOfDay=" + dateOfDay +
+                ", pairsNumber=" + pairsNumber +
+                ", auditory='" + auditory + '\'' +
+                ", subjectId=" + subjectId +
+                ", groupId=" + groupId +
+                ", teacherId=" + teacherId +
+                '}' + '\n';
+    }
 }
