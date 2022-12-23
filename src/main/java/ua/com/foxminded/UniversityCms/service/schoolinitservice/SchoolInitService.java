@@ -1,9 +1,11 @@
 package ua.com.foxminded.UniversityCms.service.schoolinitservice;
 
+import org.springframework.stereotype.Service;
 import ua.com.foxminded.UniversityCms.model.*;
 
 import java.util.List;
 
+@Service
 public interface SchoolInitService {
 
     List<Subject> findAllSubjects();
