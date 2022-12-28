@@ -37,11 +37,6 @@ public class UniversityInitializer {
             schoolDbInitializer.createRandomStudents();
             schoolDbInitializer.createRandomTimetable();
             log.info("End university initialize");
-
-            List<Student> students = studentService.findAll();
-            List<Timetable> timetables = timetableService.findDayTimetableForStudent(students.get(0).getId());
-            System.out.println(timetables.toString());
-
         } catch (FileException e) {
             log.error("error with source file names");
         }

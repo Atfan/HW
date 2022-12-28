@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html
+        xmlns =="http://www.w3.org/1999/ xmlns th =="http://www.thymeleaf.>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <a href="/">Назад</a>
+
+    <table border = "1">
+
+        <tr>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Телефон</th>
+            <th>Студенческий билет</th>
+        </tr>
+        <tr th:each = "student : ${students}">
+            <td th:utext="${student.firstName}">...</td>
+            <td th:utext="${student.lastName}">...</td>
+            <td th:utext="${student.phone}">...</td>
+            <td th:utext="${student.studTicketNumber}">...</td>
+        </tr>
+    </table>
+
+</body>
+</html>
