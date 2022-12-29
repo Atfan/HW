@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html
+        xmlns =="http://www.w3.org/1999/ xmlns th =="http://www.thymeleaf.>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<a href="/">Назад</a>
+
+<table border = "1">
+
+    <tr>
+        <th>Название предмета</th>
+    </tr>
+    <tr th:each = "subject : ${subjects}">
+        <td th:utext="${subject.subjectName}">...</td>
+    </tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html
+        xmlns =="http://www.w3.org/1999/ xmlns th =="http://www.thymeleaf.>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<a href="/">Назад</a>
+
+<table border = "1">
+
+    <tr>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Телефон</th>
+    </tr>
+    <tr th:each = "teacher : ${teachers}">
+        <td th:utext="${teacher.firstName}">...</td>
+        <td th:utext="${teacher.lastName}">...</td>
+        <td th:utext="${teacher.phone}">...</td>
+    </tr>
+</table>
+
+</body>
+</html>
