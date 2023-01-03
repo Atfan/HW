@@ -1,0 +1,34 @@
+<div xmlns:th="http://www.thymeleaf.org"
+     style="border: 1px solid #ccc;padding:5px;margin-bottom:20px;">
+
+  <a th:href="@{/}">Home</a>
+
+  &nbsp; | &nbsp;
+
+  <a th:if="${#request.userPrincipal != null}" th:href="@{/userInfo}">Info </a>
+
+  <a th:if="${#request.userPrincipal != null}" > &nbsp; | &nbsp; </a>
+
+  <a th:if="${#request.isUserInRole('ROLE_STUDENT') || #request.isUserInRole('ROLE_ADMIN')}" th:href="@{/students/get}">Students</a>
+
+  <a th:if="${#request.isUserInRole('ROLE_STUDENT') || #request.isUserInRole('ROLE_ADMIN')}" > &nbsp; | &nbsp; </a>
+
+  <a th:if="${#request.isUserInRole('ROLE_STUDENT') || #request.isUserInRole('ROLE_ADMIN')}" th:href="@{/groups/get}">Groups </a>
+
+  <a th:if="${#request.isUserInRole('ROLE_STUDENT') || #request.isUserInRole('ROLE_ADMIN')}" > &nbsp; | &nbsp; </a>
+
+  <a th:if="${#request.isUserInRole('ROLE_TEACHER') || #request.isUserInRole('ROLE_ADMIN')}" th:href="@{/teachers/get}">Teachers </a>
+
+  <a th:if="${#request.isUserInRole('ROLE_TEACHER') || #request.isUserInRole('ROLE_ADMIN')}" > &nbsp; | &nbsp; </a>
+
+  <a th:if="${#request.isUserInRole('ROLE_TEACHER') || #request.isUserInRole('ROLE_ADMIN')}" th:href="@{/subjects/get}">Subjects </a>
+
+  <a th:if="${#request.isUserInRole('ROLE_TEACHER') || #request.isUserInRole('ROLE_ADMIN')}" > &nbsp; | &nbsp; </a>
+
+  <a th:if="${#request.isUserInRole('ROLE_ADMIN')}" th:href="@{/admin}">Admin </a>
+
+  <a th:if="${#request.isUserInRole('ROLE_ADMIN')}" > &nbsp; | &nbsp; </a>
+
+  <a th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Logout</a>
+
+</div>
