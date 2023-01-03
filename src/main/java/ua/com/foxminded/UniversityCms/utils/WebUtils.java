@@ -9,7 +9,7 @@ import java.util.Collection;
 @UtilityClass
 public class WebUtils {
 
-    public static String toString(User user) {
+    public static String pageInfoOutputMessageCreator(User user) {
         StringBuilder sb = new StringBuilder();
 
         sb.append("UserName:").append(user.getUsername());

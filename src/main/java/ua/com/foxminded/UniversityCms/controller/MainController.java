@@ -22,7 +22,7 @@ public class MainController {
 
         User loginedUser = (User) ((Authentication) principal).getPrincipal();
 
-        String userInfo = WebUtils.toString(loginedUser);
+        String userInfo = WebUtils.pageInfoOutputMessageCreator(loginedUser);
         model.addAttribute("userInfo", userInfo);
 
         return "adminPage";
@@ -48,7 +48,7 @@ public class MainController {
 
         User loginedUser = (User) ((Authentication) principal).getPrincipal();
 
-        String userInfo = WebUtils.toString(loginedUser);
+        String userInfo = WebUtils.pageInfoOutputMessageCreator(loginedUser);
         model.addAttribute("userInfo", userInfo);
 
         return "userInfoPage";
@@ -60,7 +60,7 @@ public class MainController {
         if (principal != null) {
             User loginedUser = (User) ((Authentication) principal).getPrincipal();
 
-            String userInfo = WebUtils.toString(loginedUser);
+            String userInfo = WebUtils.pageInfoOutputMessageCreator(loginedUser);
 
             model.addAttribute("userInfo", userInfo);
 

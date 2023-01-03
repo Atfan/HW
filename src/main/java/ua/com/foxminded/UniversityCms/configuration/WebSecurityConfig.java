@@ -34,11 +34,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable();
 
-        http.authorizeRequests().antMatchers("/", "/login", "/logout").permitAll();
-        http.authorizeRequests().antMatchers("/userInfo").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_STUDENT', 'ROLE_TEACHER')");
-        http.authorizeRequests().antMatchers("/admin").access("hasRole('ROLE_ADMIN')");
-        http.authorizeRequests().antMatchers("/students/get", "/groups/get").access("hasAnyRole('ROLE_STUDENT', 'ROLE_ADMIN')");
-        http.authorizeRequests().antMatchers("/teachers/get", "/subjects/get").access("hasAnyRole('ROLE_TEACHER', 'ROLE_ADMIN')");
+        http.authorizeRequests().mvcMatchers("/", "/login", "/logout").permitAll();
+        http.authorizeRequests().mvcMatchers("/userInfo").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_STUDENT', 'ROLE_TEACHER')");
+        http.authorizeRequests().mvcMatchers("/admin").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().mvcMatchers("/students/get", "/groups/get").access("hasAnyRole('ROLE_STUDENT', 'ROLE_ADMIN')");
+        http.authorizeRequests().mvcMatchers("/teachers/get", "/subjects/get").access("hasAnyRole('ROLE_TEACHER', 'ROLE_ADMIN')");
         http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
         http.authorizeRequests().and().formLogin()
             .loginProcessingUrl("/j_spring_security_check")
