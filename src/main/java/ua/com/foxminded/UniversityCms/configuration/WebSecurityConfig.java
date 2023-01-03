@@ -1,6 +1,7 @@
 package ua.com.foxminded.UniversityCms.configuration;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -8,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import ua.com.foxminded.UniversityCms.service.userdetailsservice.UserDetailsServiceImpl;
 
 @Configuration
@@ -16,6 +18,9 @@ import ua.com.foxminded.UniversityCms.service.userdetailsservice.UserDetailsServ
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsServiceImpl userDetailsService;
+
+    @Autowired
+    private MyBasicAuthenticationEntryPoint authenticationEntryPoint;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -39,6 +44,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().mvcMatchers("/admin").access("hasRole('ROLE_ADMIN')");
         http.authorizeRequests().mvcMatchers("/students/get", "/groups/get").access("hasAnyRole('ROLE_STUDENT', 'ROLE_ADMIN')");
         http.authorizeRequests().mvcMatchers("/teachers/get", "/subjects/get").access("hasAnyRole('ROLE_TEACHER', 'ROLE_ADMIN')");
+
+        http.authorizeRequests().and().exceptionHandling().authenticationEntryPoint(authenticationEntryPoint);
+
         http.authorizeRequests().and().formLogin()
             .loginProcessingUrl("/j_spring_security_check")
             .loginPage("/login")
