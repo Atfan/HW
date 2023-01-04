@@ -11,7 +11,7 @@ import java.io.IOException;
 @Component
 public class MyBasicAuthenticationEntryPoint extends BasicAuthenticationEntryPoint {
 
-    private static final String realName = "user";
+    private static final String realName = "app_user";
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authEx) throws IOException {
