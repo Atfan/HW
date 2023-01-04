@@ -7,6 +7,7 @@ import ua.com.foxminded.UniversityCms.dao.student.StudentRepository;
 import ua.com.foxminded.UniversityCms.dao.subject.SubjectRepository;
 import ua.com.foxminded.UniversityCms.dao.teacher.TeacherRepository;
 import ua.com.foxminded.UniversityCms.dao.timetable.TimetableRepository;
+import ua.com.foxminded.UniversityCms.dao.user.UserRepository;
 import ua.com.foxminded.UniversityCms.model.*;
 
 import java.util.List;
@@ -28,6 +29,9 @@ public class SchoolInitServiceImpl implements SchoolInitService{
 
     @Autowired
     private TimetableRepository timetableRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public List<Subject> findAllSubjects() {

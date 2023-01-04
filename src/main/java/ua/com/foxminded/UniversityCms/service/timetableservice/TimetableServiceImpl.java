@@ -3,7 +3,6 @@ package ua.com.foxminded.UniversityCms.service.timetableservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.com.foxminded.UniversityCms.dao.timetable.TimetableRepository;
-import ua.com.foxminded.UniversityCms.model.Student;
 import ua.com.foxminded.UniversityCms.model.Timetable;
 
 import java.sql.SQLException;
@@ -57,4 +56,5 @@ public class TimetableServiceImpl implements TimetableService{
             return new ArrayList<>();
         }
     }
+
 }

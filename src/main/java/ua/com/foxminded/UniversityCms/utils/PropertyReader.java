@@ -1,6 +1,5 @@
 package ua.com.foxminded.UniversityCms.utils;
 
-
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import ua.com.foxminded.UniversityCms.exception.PropertyFileException;
@@ -24,4 +23,5 @@ public class PropertyReader {
             throw new PropertyFileException("Error open file property");
         }
     }
+
 }

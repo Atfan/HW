@@ -3,6 +3,7 @@ package ua.com.foxminded.UniversityCms.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ua.com.foxminded.UniversityCms.service.studentservice.StudentService;
@@ -12,6 +13,11 @@ public class StudentController {
 
     @Autowired
     private StudentService studentService;
+
+    @GetMapping(value = "/student")
+    public String studentPage(Model model) {
+        return "student_menu";
+    }
 
     @RequestMapping(value = "/students/get", method = RequestMethod.GET)
     public String getStudents(Model model) {
@@ -33,4 +39,5 @@ public class StudentController {
     public String deleteStudent(Model model) {
         return null;
     }
+
 }

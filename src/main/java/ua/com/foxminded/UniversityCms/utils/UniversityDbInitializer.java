@@ -1,9 +1,11 @@
 package ua.com.foxminded.UniversityCms.utils;
 
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.com.foxminded.UniversityCms.exception.FileException;
 import ua.com.foxminded.UniversityCms.model.*;
+import ua.com.foxminded.UniversityCms.service.appuserservice.AppUserService;
 import ua.com.foxminded.UniversityCms.service.schoolinitservice.SchoolInitService;
 
 import java.io.IOException;
@@ -19,6 +21,9 @@ public class UniversityDbInitializer {
 
     private final SchoolInitService schoolInitService;
 
+    @Autowired
+    private AppUserService appUserService;
+
     private final String CORPUS_NAME = "corpus";
     private final String AUDITORY_DELIMETER = "--";
 
@@ -31,6 +36,22 @@ public class UniversityDbInitializer {
     public void deleteAllRowsInDB() {
         schoolInitService.deleteAllRowsInDB();
         log.debug("All rows in DB was deleted");
+    }
+
+    public void createUsers() {
+        AppUser apu1 = new AppUser();
+        apu1.setUserId(1L);
+        apu1.setUserName("admin");
+        apu1.setEncrytedPassword("$2a$10$PrI5Gk9L.tSZiW9FXhTS8O8Mz9E97k2FZbFvGFFaSsiTUIl.TCrFu");
+        apu1.setEnabled(true);
+        appUserService.save(apu1);
+
+        AppUser apu2 = new AppUser();
+        apu2.setUserId(2L);
+        apu2.setUserName("user");
+        apu2.setEncrytedPassword("$2a$10$PrI5Gk9L.tSZiW9FXhTS8O8Mz9E97k2FZbFvGFFaSsiTUIl.TCrFu");
+        apu2.setEnabled(true);
+        appUserService.save(apu2);
     }
 
     public void createRandomGroups() {
@@ -184,4 +205,5 @@ public class UniversityDbInitializer {
         }
         return studTicketNumber;
     }
+
 }

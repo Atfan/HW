@@ -43,4 +43,5 @@ public class StudentServiceImpl implements StudentService {
     public void deleteAll() {
         studentRepository.deleteAll();
     }
+
 }

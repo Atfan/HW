@@ -1,7 +1,5 @@
 package ua.com.foxminded.UniversityCms.service.timetableservice;
 
-import org.springframework.data.repository.query.Param;
-import ua.com.foxminded.UniversityCms.model.Student;
 import ua.com.foxminded.UniversityCms.model.Timetable;
 
 import java.util.List;
@@ -20,4 +18,5 @@ public interface TimetableService {
     void deleteAll() ;
 
     List<Timetable> findDayTimetableForStudent(long id);
+
 }

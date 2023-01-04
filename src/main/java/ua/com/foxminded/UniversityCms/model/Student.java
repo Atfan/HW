@@ -30,4 +30,5 @@ public class Student {
     @ManyToOne
     @JoinColumn(name="group_id", nullable=false)
     private Group group;
+
 }
