@@ -20,4 +20,5 @@ public class AppUserServiceImpl implements AppUserService{
     public void deleteAll() {
         userRepository.deleteAll();
     }
+
 }

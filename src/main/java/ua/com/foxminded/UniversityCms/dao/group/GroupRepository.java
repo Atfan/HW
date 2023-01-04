@@ -8,4 +8,5 @@ import ua.com.foxminded.UniversityCms.model.Group;
 @Repository
 @Transactional
 public interface GroupRepository extends JpaRepository<Group,Long> {
+
 }

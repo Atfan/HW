@@ -23,4 +23,5 @@ public class PropertyReader {
             throw new PropertyFileException("Error open file property");
         }
     }
+
 }

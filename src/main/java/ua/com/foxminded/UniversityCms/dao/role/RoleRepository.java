@@ -8,4 +8,5 @@ import ua.com.foxminded.UniversityCms.model.Role;
 @Repository
 @Transactional
 public interface RoleRepository extends JpaRepository<Role, Long> {
+
 }

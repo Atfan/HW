@@ -33,4 +33,5 @@ public class TeacherController {
     public String deleteTeacher(Model model) {
         return null;
     }
+
 }

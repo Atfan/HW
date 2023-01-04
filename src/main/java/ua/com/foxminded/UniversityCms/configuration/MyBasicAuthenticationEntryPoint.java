@@ -24,4 +24,5 @@ public class MyBasicAuthenticationEntryPoint extends BasicAuthenticationEntryPoi
         setRealmName(realName);
         super.afterPropertiesSet();
     }
+
 }

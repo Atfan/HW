@@ -55,4 +55,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .passwordParameter("password").and()
             .logout().logoutUrl("/logout").logoutSuccessUrl("/logoutSuccessful");
     }
+
 }

@@ -30,4 +30,5 @@ public class TxtFileReader {
             throw new FileException("Error with file");
         }
     }
+
 }

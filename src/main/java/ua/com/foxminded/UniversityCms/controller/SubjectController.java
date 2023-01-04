@@ -33,4 +33,5 @@ public class SubjectController {
     public String deleteSubject(Model model) {
         return null;
     }
+
 }

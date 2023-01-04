@@ -8,4 +8,5 @@ import ua.com.foxminded.UniversityCms.model.Teacher;
 @Repository
 @Transactional
 public interface TeacherRepository extends JpaRepository<Teacher,Long> {
+
 }

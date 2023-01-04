@@ -8,4 +8,5 @@ import ua.com.foxminded.UniversityCms.model.Subject;
 @Repository
 @Transactional
 public interface SubjectRepository extends JpaRepository<Subject,Long> {
+
 }

@@ -84,4 +84,5 @@ public class SchoolInitServiceImpl implements SchoolInitService{
     public void saveTimetablesList(List<Timetable> timetables) {
         timetableRepository.saveAll(timetables);
     }
+
 }

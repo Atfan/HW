@@ -7,4 +7,5 @@ public interface AppUserService {
         void save(AppUser appUser) ;
 
         void deleteAll() ;
+
 }

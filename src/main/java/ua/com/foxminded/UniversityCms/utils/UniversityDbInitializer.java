@@ -205,4 +205,5 @@ public class UniversityDbInitializer {
         }
         return studTicketNumber;
     }
+
 }

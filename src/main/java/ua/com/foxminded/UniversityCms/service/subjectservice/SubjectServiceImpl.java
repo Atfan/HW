@@ -43,4 +43,5 @@ public class SubjectServiceImpl implements SubjectService{
     public void deleteAll() {
         subjectRepository.deleteAll();
     }
+
 }

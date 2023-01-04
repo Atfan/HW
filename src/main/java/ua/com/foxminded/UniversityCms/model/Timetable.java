@@ -49,4 +49,5 @@ public class Timetable {
                 ", teacherId=" + teacherId +
                 '}' + '\n';
     }
+
 }

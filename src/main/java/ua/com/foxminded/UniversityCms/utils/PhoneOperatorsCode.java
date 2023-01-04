@@ -15,4 +15,5 @@ public enum PhoneOperatorsCode {
     public String getOperatorsCode() {
         return operatorsCode;
     }
+
 }

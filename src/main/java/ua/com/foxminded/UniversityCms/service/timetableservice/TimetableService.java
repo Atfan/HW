@@ -18,4 +18,5 @@ public interface TimetableService {
     void deleteAll() ;
 
     List<Timetable> findDayTimetableForStudent(long id);
+
 }

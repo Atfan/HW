@@ -6,4 +6,5 @@ public class PropertyFileException extends IOException {
     public PropertyFileException(String errorMessage) {
         super(errorMessage);
     }
+
 }

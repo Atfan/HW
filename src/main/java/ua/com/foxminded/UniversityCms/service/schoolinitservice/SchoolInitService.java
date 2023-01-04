@@ -27,4 +27,5 @@ public interface SchoolInitService {
     void saveTeachersList(List<Teacher> teachers);
 
     void saveTimetablesList(List<Timetable> timetables);
+
 }

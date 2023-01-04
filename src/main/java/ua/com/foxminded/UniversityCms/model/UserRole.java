@@ -47,4 +47,5 @@ public class UserRole {
                 ", role=" + role +
                 '}';
     }
+
 }

@@ -19,4 +19,5 @@ public interface TimetableRepository extends JpaRepository<Timetable,Long> {
             + "  join students stud on gr.id = stud.group_id "
             + " WHERE stud.id = :findStud ", nativeQuery = true)
     List<Timetable> findDayTimetableForStudent(@Param("findStud") long id) throws SQLException;
+
 }
