@@ -1,6 +1,5 @@
 package ua.com.foxminded.UniversityCms.model;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

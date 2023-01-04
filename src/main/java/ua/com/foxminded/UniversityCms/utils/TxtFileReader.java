@@ -1,6 +1,5 @@
 package ua.com.foxminded.UniversityCms.utils;
 
-
 import lombok.extern.log4j.Log4j2;
 import ua.com.foxminded.UniversityCms.exception.FileException;
 
@@ -31,5 +30,4 @@ public class TxtFileReader {
             throw new FileException("Error with file");
         }
     }
-
 }

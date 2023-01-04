@@ -37,7 +37,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException("User " + userName + " was not found in the database");
         }
 
-        log.info("Found User: " + appUser);
+        log.debug("Found User: " + appUser);
 
         List<String> roleNames = this.userRoleRepository.getRoleNames(appUser.getUserId());
 
@@ -50,5 +50,4 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         return new User(appUser.getUserName(), appUser.getEncrytedPassword(), grantList);
     }
-
 }

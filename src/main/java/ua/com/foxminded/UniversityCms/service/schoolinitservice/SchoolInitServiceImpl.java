@@ -58,7 +58,6 @@ public class SchoolInitServiceImpl implements SchoolInitService{
         subjectRepository.deleteAll();
         groupRepository.deleteAll();
         teacherRepository.deleteAll();
-//        userRepository.deleteAll();
     }
 
     @Override
@@ -85,5 +84,4 @@ public class SchoolInitServiceImpl implements SchoolInitService{
     public void saveTimetablesList(List<Timetable> timetables) {
         timetableRepository.saveAll(timetables);
     }
-
 }
