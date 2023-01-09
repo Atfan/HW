@@ -17,4 +17,6 @@ public interface TeachersService {
 
     void deleteAll() ;
 
+    List<Teacher> findByFirstNameAndLastNameLike(String firstName, String lastName);
+
 }

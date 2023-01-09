@@ -20,7 +20,8 @@ public class Subject {
     private String subjectName;
 
     @ManyToOne
-    @JoinColumn(name="teacher_id", nullable=false)
+//    @JoinColumn(name="teacher_id", nullable=false)
+    @JoinColumn(name="teacher_id")
     private Teacher teacher;
 
     @Override

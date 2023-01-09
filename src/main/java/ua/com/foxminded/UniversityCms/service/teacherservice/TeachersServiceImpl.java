@@ -43,4 +43,9 @@ public class TeachersServiceImpl implements TeachersService{
         teacherRepository.deleteAll();
     }
 
+    @Override
+    public List<Teacher> findByFirstNameAndLastNameLike(String firstName, String lastName) {
+        return teacherRepository.findByFirstNameAndLastNameLike(firstName,lastName);
+    }
+
 }

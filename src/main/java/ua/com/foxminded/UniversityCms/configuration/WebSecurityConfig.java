@@ -39,10 +39,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
 
         http.authorizeRequests().mvcMatchers("/", "/login", "/logout").permitAll();
-        http.authorizeRequests().mvcMatchers("/userInfo").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_STUDENT', 'ROLE_TEACHER')");
-        http.authorizeRequests().mvcMatchers("/admin").access("hasRole('ROLE_ADMIN')");
-        http.authorizeRequests().mvcMatchers("/students/get", "/groups/get").access("hasAnyRole('ROLE_STUDENT', 'ROLE_ADMIN')");
-        http.authorizeRequests().mvcMatchers("/teachers/get", "/subjects/get").access("hasAnyRole('ROLE_TEACHER', 'ROLE_ADMIN')");
+        http.authorizeRequests().mvcMatchers("/userInfo")
+                .access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_STUDENT', 'ROLE_TEACHER', 'ROLE_STUFF')");
+        http.authorizeRequests().mvcMatchers(
+                "/admin",
+                "/subjects/create",
+                "/subjects/update",
+                "/subjects/delete",
+                "/updateSubject",
+                "/deleteSubject",
+                "/createCourse").access("hasAnyRole('ROLE_ADMIN', 'ROLE_STUFF')");
+        http.authorizeRequests().mvcMatchers("/students/get", "/groups/get").access("hasAnyRole('ROLE_STUDENT', 'ROLE_ADMIN', 'ROLE_STUFF')");
+        http.authorizeRequests().mvcMatchers("/teachers/get").access("hasAnyRole('ROLE_TEACHER', 'ROLE_ADMIN', 'ROLE_STUFF')");
+        http.authorizeRequests().mvcMatchers("/subjects/get").access("hasAnyRole('ROLE_TEACHER', 'ROLE_ADMIN', 'ROLE_STUDENT', 'ROLE_STUFF')");
 
         http.authorizeRequests().and().exceptionHandling().authenticationEntryPoint(authenticationEntryPoint);
 
