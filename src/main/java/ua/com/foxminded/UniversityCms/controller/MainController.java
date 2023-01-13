@@ -39,6 +39,11 @@ public class MainController {
         return "logoutSuccessfulPage";
     }
 
+    @GetMapping(value = "/createCourse")
+    public String createCoursePage(Model model) {
+        return "createCourse";
+    }
+
     @GetMapping(value = "/userInfo")
     public String userInfo(Model model, Principal principal) {
 

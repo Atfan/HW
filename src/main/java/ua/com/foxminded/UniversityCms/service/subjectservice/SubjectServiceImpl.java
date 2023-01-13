@@ -40,6 +40,11 @@ public class SubjectServiceImpl implements SubjectService{
     }
 
     @Override
+    public List<Subject> findBySubjectNameLike(String subjectName) {
+        return subjectRepository.findBySubjectNameLike(subjectName);
+    }
+
+    @Override
     public void deleteAll() {
         subjectRepository.deleteAll();
     }

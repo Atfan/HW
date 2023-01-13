@@ -15,6 +15,8 @@ public interface SubjectService {
 
     List<Subject> findAll() ;
 
+    List<Subject> findBySubjectNameLike(String subjectName);
+
     void deleteAll() ;
 
 }
