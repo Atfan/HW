@@ -80,5 +80,4 @@ public class SubjectControllerTest {
                 .andExpect(status().is4xxClientError());
     }
 
-
 }

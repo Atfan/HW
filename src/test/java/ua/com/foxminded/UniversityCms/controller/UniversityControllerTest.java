@@ -9,6 +9,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -23,6 +24,10 @@ public class UniversityControllerTest {
 
     @Autowired
     private WebApplicationContext context;
+
+
+    @Autowired
+    private MainController mainController;
 
     @BeforeEach
     public void setup() {
@@ -63,6 +68,33 @@ public class UniversityControllerTest {
 
         mockMvc.perform(get("/admin").with(user("stuff").password("123").roles("STUFF")))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void testNotPresentEndpoint_ShouldReturnError4xx_WhenAdminCome() throws Exception {
+
+        mockMvc.perform(get("/administrator").with(user("admin").password("123").roles("ADMIN")))
+                .andExpect(status().is4xxClientError());
+    }
+
+    @Test
+    public void testNotPresentUser_ShouldReturnError4xx_WhenUserInfoPageGetFromNotPresentUser() throws Exception {
+
+        mockMvc.perform(get("/userinfo").with(user("unknown").password("123").roles("USER")))
+                .andExpect(status().is4xxClientError());
+    }
+
+    @Test
+    public void testNotPresentUserAndNotPresentEndpoint_ShouldReturnError4xx_WhenUnknownPageGetFromNotPresentUser() throws Exception {
+
+        mockMvc.perform(get("/unknown").with(user("unknown").password("123").roles("USER")))
+                .andExpect(status().is4xxClientError());
+    }
+
+    @Test
+    public void testMainController_ShouldReturnNotNull_WhenCalled() throws Exception {
+
+        assertThat(mainController).isNotNull();
     }
 
 }
