@@ -3,10 +3,14 @@
     <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title> Groups Get </title>
 </head>
 <body>
     <th:block th:include="/fragments/menu"></th:block>
+
+    <div th:if="${#request.isUserInRole('ROLE_ADMIN') || #request.isUserInRole('ROLE_STUFF')}">
+        <th:block th:include="/fragments/menu1"> </th:block>
+    </div>
 
 <table border = "1">
 

@@ -25,4 +25,20 @@
 
   <a th:if="${#request.isUserInRole('ROLE_STUFF')}" > &nbsp; | &nbsp; </a>
 
+  <a th:if="${#request.userPrincipal != null}" th:href="@{/createGroup}">create group</a>
+
+  <a th:if="${#request.userPrincipal != null}" > &nbsp; | &nbsp; </a>
+
+  <a th:if="${#request.userPrincipal != null}" th:href="@{/groups/get}">read list of groups </a>
+
+  <a th:if="${#request.userPrincipal != null}" > &nbsp; | &nbsp; </a>
+
+  <a th:if="${#request.userPrincipal != null}" th:href="@{/updateGroup}">update group </a>
+
+  <a th:if="${#request.userPrincipal != null}" > &nbsp; | &nbsp; </a>
+
+  <a th:if="${#request.userPrincipal != null}" th:href="@{/deleteGroup}">delete group </a>
+
+  <a th:if="${#request.userPrincipal != null}" > &nbsp; | &nbsp; </a>
+
 </div>

@@ -18,4 +18,6 @@ public interface GroupService {
 
     void deleteAll() ;
 
+    List<Group> findByGroupNameLike(String groupName);
+
 }
