@@ -44,4 +44,9 @@ public class GroupServiceImpl implements GroupService{
         groupRepository.deleteAll();
     }
 
+    @Override
+    public List<Group> findByGroupNameLike(String groupName) {
+        return groupRepository.findByGroupNameLike(groupName);
+    }
+
 }

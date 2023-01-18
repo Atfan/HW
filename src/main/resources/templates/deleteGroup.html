@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title> Update Group </title>
+</head>
+<body>
+<th:block th:include="/fragments/menu"> </th:block>
+
+<th:block th:include="/fragments/menu1"> </th:block>
+
+<h3>Enter course name:</h3>
+<form name='f' th:action="@{/groups/delete}" method='POST'>
+    <table>
+        <tr>
+            <select name="groupName">
+                <option th:each="group : ${groups}"
+                        th:value="${group.groupName}"
+                        th:text="${group.groupName}">
+                    ...</option>
+            </select>
+        </tr>
+
+        <tr>
+            <td><input name="submit" type="submit" value="submit"/></td>
+        </tr>
+    </table>
+</form>
+
+</body>
+
+</html>

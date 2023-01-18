@@ -48,7 +48,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/subjects/delete",
                 "/updateSubject",
                 "/deleteSubject",
-                "/createCourse").access("hasAnyRole('ROLE_ADMIN', 'ROLE_STUFF')");
+                "/createCourse",
+                "/groups/create",
+                "/groups/update",
+                "/groups/delete",
+                "/updateGroup",
+                "/deleteGroup",
+                "/createGroup"
+                ).access("hasAnyRole('ROLE_ADMIN', 'ROLE_STUFF')");
         http.authorizeRequests().mvcMatchers("/students/get", "/groups/get").access("hasAnyRole('ROLE_STUDENT', 'ROLE_ADMIN', 'ROLE_STUFF')");
         http.authorizeRequests().mvcMatchers("/teachers/get").access("hasAnyRole('ROLE_TEACHER', 'ROLE_ADMIN', 'ROLE_STUFF')");
         http.authorizeRequests().mvcMatchers("/subjects/get").access("hasAnyRole('ROLE_TEACHER', 'ROLE_ADMIN', 'ROLE_STUDENT', 'ROLE_STUFF')");
