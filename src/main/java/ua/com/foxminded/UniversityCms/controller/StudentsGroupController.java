@@ -23,18 +23,18 @@ public class StudentsGroupController {
     @Autowired
     private  GroupService groupService;
 
-    @GetMapping(value = "/assignStudentsToGroup")
+    @GetMapping(value = "/assignStudents")
     public String assignStudentsToGroupPage(Model model) {
         model.addAttribute("students", studentService.findAll());
         model.addAttribute("groups", groupService.findAll());
-        return "assignStudentsToGroup";
+        return "assignStudents";
     }
 
-    @GetMapping(value = "/reassignStudentsToGroup")
+    @GetMapping(value = "/reassignStudents")
     public String reassignStudentsToGroupPage(Model model) {
         model.addAttribute("students", studentService.findAll());
         model.addAttribute("groups", groupService.findAll());
-        return "reassignStudentsToGroup";
+        return "reassignStudents";
     }
 
     @GetMapping(value = "/studentsInGroup")
@@ -73,7 +73,7 @@ public class StudentsGroupController {
 
         model.addAttribute("students", studentService.findAll());
         model.addAttribute("groups", groupService.findAll());
-        return "assignStudentsToGroup";
+        return "assignStudents";
     }
 
     @RequestMapping(value = "/studentsGroups/reassign", method = RequestMethod.POST)
@@ -94,7 +94,7 @@ public class StudentsGroupController {
 
         model.addAttribute("students", studentService.findAll());
         model.addAttribute("groups", groupService.findAll());
-        return "reassignStudentsToGroup";
+        return "reassignStudents";
     }
 
 }

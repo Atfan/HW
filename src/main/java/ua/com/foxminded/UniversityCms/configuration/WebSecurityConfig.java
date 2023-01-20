@@ -39,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
 
         http.authorizeRequests().mvcMatchers("/", "/login", "/logout").permitAll();
-        http.authorizeRequests().mvcMatchers("/userInfo", "/studentsInGroup", "/studentsGroups/listStudentsInGroup")
+        http.authorizeRequests().mvcMatchers("/userInfo", "/studentsInGroup", "/studentsGroups/choiceGroup")
                 .access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_STUDENT', 'ROLE_TEACHER', 'ROLE_STUFF')");
         http.authorizeRequests().mvcMatchers(
                 "/admin",
@@ -57,8 +57,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/createGroup",
                 "/studentsGroups/assign",
                 "/studentsGroups/reassign",
-                "/assignStudentsToGroup",
-                "/reassignStudentsToGroup"
+                "/assignStudents",
+                "/reassignStudents"
                 ).access("hasAnyRole('ROLE_ADMIN', 'ROLE_STUFF')");
         http.authorizeRequests().mvcMatchers("/students/get", "/groups/get").access("hasAnyRole('ROLE_STUDENT', 'ROLE_ADMIN', 'ROLE_STUFF')");
         http.authorizeRequests().mvcMatchers("/teachers/get").access("hasAnyRole('ROLE_TEACHER', 'ROLE_ADMIN', 'ROLE_STUFF')");
