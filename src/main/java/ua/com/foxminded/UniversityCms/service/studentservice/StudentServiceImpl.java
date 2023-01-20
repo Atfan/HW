@@ -44,4 +44,14 @@ public class StudentServiceImpl implements StudentService {
         studentRepository.deleteAll();
     }
 
+    @Override
+    public List<Student> findByFirstNameAndLastNameLike(String firstName, String lastName) {
+        return studentRepository.findByFirstNameAndLastNameLike(firstName,lastName);
+    }
+
+    @Override
+    public List<Student> findByIdLike(Long id) {
+        return studentRepository.findByIdLike(id);
+    }
+
 }

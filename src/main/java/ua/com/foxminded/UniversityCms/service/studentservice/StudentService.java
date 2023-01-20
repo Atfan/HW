@@ -17,4 +17,8 @@ public interface StudentService {
 
     void deleteAll() ;
 
+    List<Student> findByFirstNameAndLastNameLike(String firstName, String lastName);
+
+    List<Student> findByIdLike(Long id);
+
 }
