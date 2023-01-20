@@ -10,7 +10,7 @@
 <th:block th:include="/fragments/menu1"> </th:block>
 
 <h3>Enter course name:</h3>
-<form name='f' th:action="@{/subjects/delete}" method='POST'>
+<form name='deleteSubject' th:action="@{/subjects/delete}" method='POST'>
     <table>
         <tr>
             <select name="subjectName">

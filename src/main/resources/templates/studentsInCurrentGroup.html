@@ -7,7 +7,7 @@
 <body>
     <th:block th:include="/fragments/menu"></th:block>
 
-    <form name='f' th:action="@{/studentsGroups/listStudentsInGroup}" method='POST'>
+    <form name='choiceGroup' th:action="@{/studentsGroups/choiceGroup}" method='POST'>
         <table>
             <tr>
                 <select name="groupId">

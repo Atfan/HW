@@ -10,7 +10,7 @@
 <th:block th:include="/fragments/menu1"> </th:block>
 
 <h3>Enter course name and assigned teachers name:</h3>
-<form name='f' th:action="@{/subjectsTeachers/assign}" method='POST'>
+<form name='assignTeacher' th:action="@{/subjectsTeachers/assign}" method='POST'>
     <table>
         <tr>
             <select name="subjectName">

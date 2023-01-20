@@ -46,7 +46,7 @@ public class StudentsGroupController {
         return "studentsInCurrentGroup";
     }
 
-    @RequestMapping(value = "/studentsGroups/listStudentsInGroup", method = RequestMethod.POST)
+    @RequestMapping(value = "/studentsGroups/choiceGroup", method = RequestMethod.POST)
     public String getListStudentsInGroup(@RequestParam("groupId") Long groupId,
                                          Model model) {
 
@@ -73,7 +73,7 @@ public class StudentsGroupController {
 
         model.addAttribute("students", studentService.findAll());
         model.addAttribute("groups", groupService.findAll());
-        return "reassignStudentsToGroup";
+        return "assignStudentsToGroup";
     }
 
     @RequestMapping(value = "/studentsGroups/reassign", method = RequestMethod.POST)

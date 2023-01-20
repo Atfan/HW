@@ -10,7 +10,7 @@
 <th:block th:include="/fragments/menu1"> </th:block>
 
 <h3>Enter course name:</h3>
-<form name='f' th:action="@{/groups/update}" method='POST'>
+<form name='updateGroup' th:action="@{/groups/update}" method='POST'>
     <table>
         <tr>
             <select name="groupName">

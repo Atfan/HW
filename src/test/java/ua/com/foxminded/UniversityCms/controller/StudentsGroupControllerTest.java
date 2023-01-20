@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -21,6 +22,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
@@ -33,6 +35,12 @@ public class StudentsGroupControllerTest {
     @Autowired
     private WebApplicationContext context;
 
+    @MockBean
+    private StudentService studentService;
+
+    @MockBean
+    private GroupService groupService;
+
     @BeforeEach
     public void setup() {
         mockMvc = MockMvcBuilders
@@ -40,12 +48,6 @@ public class StudentsGroupControllerTest {
                 .apply(springSecurity())
                 .build();
     }
-
-    @MockBean
-    private StudentService studentService;
-
-    @MockBean
-    private GroupService groupService;
 
     @Test
     public void testGetListOfStudentsInCurrentGroup_ShouldReturnListOfStudents_WhenRequestSendFromAll() throws Exception {
@@ -172,39 +174,91 @@ public class StudentsGroupControllerTest {
                 .andExpect(view().name("studentsInCurrentGroup"));
     }
 
+    @WithMockUser(username="user", password="123",roles="USER")
     @Test
     public void testAssignStudentsToGroupPage_ShouldReturnError4xx_WhenRequestSendFromUser() throws Exception {
 
-        mockMvc.perform(get("/studentsGroups/assign").with(user("user").password("123").roles("USER")))
+        mockMvc.perform(post("/studentsGroups/assign")
+                .param("studentName","Student Student")
+                .param("groupName","gr-11"))
                 .andExpect(status().is4xxClientError());
     }
 
     @Test
     public void testAssignStudentsToGroupPage_ShouldReturnError4xx_WhenRequestSendFromStudent() throws Exception {
 
-        mockMvc.perform(get("/studentsGroups/assign").with(user("student").password("123").roles("STUDENT")))
+        mockMvc.perform(post("/studentsGroups/assign").with(user("student").password("123").roles("STUDENT"))
+                .param("studentName","Student Student")
+                .param("groupName","gr-11"))
                 .andExpect(status().is4xxClientError());
     }
 
     @Test
     public void testAssignStudentsToGroupPage_ShouldReturnOK_WhenRequestSendFromAdmin() throws Exception {
 
-        mockMvc.perform(get("/studentsGroups/assign").with(user("admin").password("123").roles("ADMIN")))
-                .andExpect(status().is4xxClientError());
+        mockMvc.perform(post("/studentsGroups/assign")
+                    .with(user("admin").password("123").roles("ADMIN"))
+                    .param("studentName","Student Student")
+                    .param("groupName","gr-11"))
+                .andExpect(status().isOk());
     }
 
     @Test
     public void testReassignStudentsToGroupPage_ShouldReturnOK_WhenRequestSendFromAdmin() throws Exception {
 
-        mockMvc.perform(get("/studentsGroups/reassign").with(user("admin").password("123").roles("ADMIN")))
-                .andExpect(status().is4xxClientError());
+        mockMvc.perform(post("/studentsGroups/reassign").with(user("admin").password("123").roles("ADMIN"))
+                .param("studentName","Student Student")
+                .param("groupName","gr-11"))
+                .andExpect(status().isOk());
     }
 
     @Test
     public void testReassignStudentsToGroupPage_ShouldReturnError4xx_WhenRequestSendFromStudent() throws Exception {
 
-        mockMvc.perform(get("/studentsGroups/reassign").with(user("student").password("123").roles("STUDENT")))
+        mockMvc.perform(post("/studentsGroups/reassign").with(user("student").password("123").roles("STUDENT"))
+                .param("studentName","Student Student")
+                .param("groupName","gr-11"))
                 .andExpect(status().is4xxClientError());
+    }
+
+    @WithMockUser(username="student", password="123",roles="STUDENT")
+    @Test
+    public void testReassignStudentsToGroupPageWithMockUser_ShouldReturnError4xx_WhenRequestSendFromStudent() throws Exception {
+
+        mockMvc.perform(post("/studentsGroups/reassign")
+                .param("studentName","Student Student")
+                .param("groupName","gr-11"))
+                .andExpect(status().is4xxClientError());
+    }
+
+    @WithMockUser(username="teacher", password="123",roles="TEACHER")
+    @Test
+    public void testReassignStudentsToGroupPageWithMockUser_ShouldReturnError4xx_WhenRequestSendFromTeacher() throws Exception {
+
+        mockMvc.perform(post("/studentsGroups/reassign")
+                .param("studentName","Student Student")
+                .param("groupName","gr-11"))
+                .andExpect(status().is4xxClientError());
+    }
+
+    @WithMockUser(username="admin", password="123",roles="ADMIN")
+    @Test
+    public void testAssignStudentsToGroupPageWithMockUser_ShouldReturnOK_WhenRequestSendFromAdmin() throws Exception {
+
+        mockMvc.perform(post("/studentsGroups/assign")
+                .param("studentName","Student Student")
+                .param("groupName","gr-11"))
+                .andExpect(status().isOk());
+    }
+
+    @WithMockUser(username="stuff", password="123",roles="STUFF")
+    @Test
+    public void testAssignStudentsToGroupPageWithMockUser_ShouldReturnOK_WhenRequestSendFromStuff() throws Exception {
+
+        mockMvc.perform(post("/studentsGroups/assign")
+                .param("studentName","Student Student")
+                .param("groupName","gr-11"))
+                .andExpect(status().isOk());
     }
 
 }

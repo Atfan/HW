@@ -32,6 +32,9 @@ public class SubjectControllerTest {
     @Autowired
     private WebApplicationContext context;
 
+    @MockBean
+    private SubjectService subjectService;
+
     @BeforeEach
     public void setup() {
         mockMvc = MockMvcBuilders
@@ -39,9 +42,6 @@ public class SubjectControllerTest {
                 .apply(springSecurity())
                 .build();
     }
-
-    @MockBean
-    private SubjectService subjectService;
 
     @Test
     public void testGetSubjectsPage_ShouldReturnListOfSubjects_WhenRequestSendFromAdmin() throws Exception {

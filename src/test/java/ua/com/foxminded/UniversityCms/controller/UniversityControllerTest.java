@@ -25,7 +25,6 @@ public class UniversityControllerTest {
     @Autowired
     private WebApplicationContext context;
 
-
     @Autowired
     private MainController mainController;
 
