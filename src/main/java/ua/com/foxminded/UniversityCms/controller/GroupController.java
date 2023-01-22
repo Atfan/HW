@@ -11,6 +11,7 @@ import ua.com.foxminded.UniversityCms.model.Group;
 import ua.com.foxminded.UniversityCms.service.groupservice.GroupService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class GroupController {
@@ -31,10 +32,12 @@ public class GroupController {
                               Model model) {
         List<Group> findGroups = groupService.findByGroupNameLike(groupName);
         if (findGroups.size() != 0) {
-            Group updateGroup = findGroups.get(0);
-            updateGroup.setGroupName(updateGroupName);
-            updateGroup.setDescription(updateGroupDescription);
-            groupService.save(updateGroup);
+            Optional<Group> updateGroup = Optional.ofNullable(findGroups.get(0));
+            if (updateGroup.isPresent()) {
+                updateGroup.get().setGroupName(updateGroupName);
+                updateGroup.get().setDescription(updateGroupDescription);
+                groupService.save(updateGroup.get());
+            }
         }
         model.addAttribute("groups", groupService.findAll());
         return "updateGroup";
@@ -54,8 +57,10 @@ public class GroupController {
     public String deleteGroup(@RequestParam("groupName") String groupName,Model model) {
         List<Group> findGroups = groupService.findByGroupNameLike(groupName);
         if (findGroups.size() != 0) {
-            Group deleteGroup = findGroups.get(0);
-            groupService.delete(deleteGroup);
+            Optional<Group> deleteGroup = Optional.ofNullable(findGroups.get(0));
+            if (deleteGroup.isPresent()) {
+                groupService.delete(deleteGroup.get());
+            }
         }
         model.addAttribute("groups", groupService.findAll());
         return "deleteGroup";    }

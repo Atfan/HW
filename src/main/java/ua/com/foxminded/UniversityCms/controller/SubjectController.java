@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ua.com.foxminded.UniversityCms.model.Group;
 import ua.com.foxminded.UniversityCms.model.Subject;
 import ua.com.foxminded.UniversityCms.service.subjectservice.SubjectService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class SubjectController {
@@ -28,10 +30,13 @@ public class SubjectController {
     {
         List<Subject> findSubjects = subjectService.findBySubjectNameLike(subjectName);
         if (findSubjects.size() != 0) {
-            Subject updateSubject = findSubjects.get(0);
-            updateSubject.setSubjectName(updateSubjectName);
-            subjectService.save(updateSubject);
+            Optional<Subject> updateSubject = Optional.ofNullable(findSubjects.get(0));
+            if (updateSubject.isPresent()) {
+                updateSubject.get().setSubjectName(updateSubjectName);
+                subjectService.save(updateSubject.get());
+            }
         }
+
         model.addAttribute("subjects", subjectService.findAll());
         return "updateCourse";
     }
@@ -50,8 +55,10 @@ public class SubjectController {
 
         List<Subject> findSubjects = subjectService.findBySubjectNameLike(subjectName);
         if (findSubjects.size() != 0) {
-            Subject deleteSubject = findSubjects.get(0);
-            subjectService.delete(deleteSubject);
+            Optional<Subject> deleteSubject = Optional.ofNullable(findSubjects.get(0));
+            if (deleteSubject.isPresent()) {
+                subjectService.delete(deleteSubject.get());
+            }
         }
         model.addAttribute("subjects", subjectService.findAll());
         return "deleteCourse";

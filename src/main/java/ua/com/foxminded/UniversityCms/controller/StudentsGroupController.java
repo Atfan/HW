@@ -13,6 +13,7 @@ import ua.com.foxminded.UniversityCms.service.groupservice.GroupService;
 import ua.com.foxminded.UniversityCms.service.studentservice.StudentService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class StudentsGroupController {
@@ -66,9 +67,12 @@ public class StudentsGroupController {
         List<Student> findStudents = studentService.findByFirstNameAndLastNameLike(findStudentParametres[0],
                 findStudentParametres[1]);
         if (findGroup.size() != 0 && findStudents.size() != 0 ) {
-            Student addStudent = findStudents.get(0);
-            addStudent.setGroup(findGroup.get(0));
-            studentService.save(addStudent);
+            Optional<Student> addStudent = Optional.ofNullable(findStudents.get(0));
+            Optional<Group> addGroup = Optional.ofNullable(findGroup.get(0));
+            if (addStudent.isPresent() && addGroup.isPresent()) {
+                addStudent.get().setGroup(addGroup.get());
+                studentService.save(addStudent.get());
+            }
         }
 
         model.addAttribute("students", studentService.findAll());
@@ -87,9 +91,12 @@ public class StudentsGroupController {
         List<Student> findStudents = studentService.findByFirstNameAndLastNameLike(findStudentParametres[0],
                 findStudentParametres[1]);
         if (findGroup.size() != 0 && findStudents.size() != 0 ) {
-            Student addStudent = findStudents.get(0);
-            addStudent.setGroup(findGroup.get(0));
-            studentService.save(addStudent);
+            Optional<Student> addStudent = Optional.ofNullable(findStudents.get(0));
+            Optional<Group> addGroup = Optional.ofNullable(findGroup.get(0));
+            if (addStudent.isPresent() && addGroup.isPresent()) {
+                addStudent.get().setGroup(addGroup.get());
+                studentService.save(addStudent.get());
+            }
         }
 
         model.addAttribute("students", studentService.findAll());

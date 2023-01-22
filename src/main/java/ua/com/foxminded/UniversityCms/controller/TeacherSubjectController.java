@@ -13,6 +13,7 @@ import ua.com.foxminded.UniversityCms.service.subjectservice.SubjectService;
 import ua.com.foxminded.UniversityCms.service.teacherservice.TeachersService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class TeacherSubjectController {
@@ -48,9 +49,13 @@ public class TeacherSubjectController {
         List<Teacher> findTeachers = teachersService.findByFirstNameAndLastNameLike(findTeacherParametres[0],
                                                         findTeacherParametres[1]);
         if (findSubject.size() != 0 && findTeachers.size() != 0 ) {
-            Subject addSubject = findSubject.get(0);
-            addSubject.setTeacher(findTeachers.get(0));
-            subjectService.save(addSubject);
+            Optional<Subject> addSubject = Optional.ofNullable(findSubject.get(0));
+            Optional<Teacher> addTeacher = Optional.ofNullable(findTeachers.get(0));
+
+            if (addSubject.isPresent() && addTeacher.isPresent()) {
+                addSubject.get().setTeacher(addTeacher.get());
+                subjectService.save(addSubject.get());
+            }
         }
 
         model.addAttribute("subjects", subjectService.findAll());
@@ -69,9 +74,13 @@ public class TeacherSubjectController {
         List<Teacher> findTeachers = teachersService.findByFirstNameAndLastNameLike(findTeacherParametres[0],
                 findTeacherParametres[1]);
         if (findSubject.size() != 0 && findTeachers.size() != 0 ) {
-            Subject addSubject = findSubject.get(0);
-            addSubject.setTeacher(findTeachers.get(0));
-            subjectService.save(addSubject);
+            Optional<Subject> addSubject = Optional.ofNullable(findSubject.get(0));
+            Optional<Teacher> addTeacher = Optional.ofNullable(findTeachers.get(0));
+
+            if (addSubject.isPresent() && addTeacher.isPresent()) {
+                addSubject.get().setTeacher(addTeacher.get());
+                subjectService.save(addSubject.get());
+            }
         }
 
         model.addAttribute("subjects", subjectService.findAll());
