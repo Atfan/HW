@@ -13,6 +13,10 @@
 
   <a th:if="${#request.userPrincipal != null}" > &nbsp; | &nbsp; </a>
 
+  <a th:if="${#request.isUserInRole('ROLE_TEACHER')}" th:href="@{/teachersSubjects}"> List of Teachers Subjects </a>
+
+  <a th:if="${#request.isUserInRole('ROLE_TEACHER')}" > &nbsp; | &nbsp; </a>
+
   <a th:if="${#request.isUserInRole('ROLE_STUDENT') || #request.isUserInRole('ROLE_ADMIN') || #request.isUserInRole('ROLE_STUFF')}" th:href="@{/students/get}">Students</a>
 
   <a th:if="${#request.isUserInRole('ROLE_STUDENT') || #request.isUserInRole('ROLE_ADMIN') || #request.isUserInRole('ROLE_STUFF')}" > &nbsp; | &nbsp; </a>

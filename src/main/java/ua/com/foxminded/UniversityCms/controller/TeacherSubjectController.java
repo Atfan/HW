@@ -88,4 +88,26 @@ public class TeacherSubjectController {
         return "reassignTeacherToSubject";
     }
 
+    @GetMapping(value = "/teachersSubjects")
+    public String assignStudentsToGroupPage(Model model) {
+        List<Teacher> teachers = teachersService.findAll();
+        Optional<Teacher> findTeacher = Optional.ofNullable(teachers.get(0));
+
+        if (findTeacher.isPresent()) {
+            Long teacherId = findTeacher.get().getId();
+            model.addAttribute("subjects", subjectService.findByIdLike(teacherId));
+        }
+        model.addAttribute("teachers", teachersService.findAll());
+        return "teachersSubjects";
+    }
+
+    @RequestMapping(value = "/teacherSubjects/choiceTeacher", method = RequestMethod.POST)
+    public String getListStudentsInGroup(@RequestParam("teacherId") Long teacherId,
+                                         Model model) {
+
+        model.addAttribute("subjects", subjectService.findByIdLike(teacherId));
+        model.addAttribute("teachers", teachersService.findAll());
+        return "teachersSubjects";
+    }
+
 }
