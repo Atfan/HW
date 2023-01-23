@@ -41,4 +41,12 @@
 
   <a th:if="${#request.userPrincipal != null}" > &nbsp; | &nbsp; </a>
 
+  <a th:if="${#request.userPrincipal != null}" th:href="@{/assignStudents}">assign Student to Group </a>
+
+  <a th:if="${#request.userPrincipal != null}" > &nbsp; | &nbsp; </a>
+
+  <a th:if="${#request.userPrincipal != null}" th:href="@{/reassignStudents}">reassign Student to Group </a>
+
+  <a th:if="${#request.userPrincipal != null}" > &nbsp; | &nbsp; </a>
+
 </div>

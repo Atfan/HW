@@ -32,6 +32,9 @@ public class GroupControllerTest {
     @Autowired
     private WebApplicationContext context;
 
+    @MockBean
+    private GroupService groupService;
+
     @BeforeEach
     public void setup() {
         mockMvc = MockMvcBuilders
@@ -39,9 +42,6 @@ public class GroupControllerTest {
                 .apply(springSecurity())
                 .build();
     }
-
-    @MockBean
-    private GroupService groupService;
 
     @Test
     public void testGetGroupsPage_ShouldReturnListOfGroups_WhenRequestSendFromAdmin() throws Exception {

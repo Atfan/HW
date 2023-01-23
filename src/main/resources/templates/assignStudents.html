@@ -2,16 +2,25 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title> Update Group </title>
+    <title> UpdateCourse </title>
 </head>
 <body>
 <th:block th:include="/fragments/menu"> </th:block>
 
 <th:block th:include="/fragments/menu1"> </th:block>
 
-<h3>Enter course name:</h3>
-<form name='updateGroup' th:action="@{/groups/update}" method='POST'>
+<h3>Enter course name and assigned teachers name:</h3>
+<form name='assignStudent' th:action="@{/studentsGroups/assign}" method='POST'>
     <table>
+        <tr>
+            <select name="studentName">
+                <option th:each="student : ${students}"
+                        th:value="${student.firstName + ' ' + student.lastName}"
+                        th:text="${student.firstName + ' ' + student.lastName}">
+                    ...</option>
+            </select>
+        </tr>
+
         <tr>
             <select name="groupName">
                 <option th:each="group : ${groups}"
@@ -21,14 +30,6 @@
             </select>
         </tr>
 
-        <tr>
-            <td>New Group Name:</td>
-            <td><input type='text' name='updateGroupName' value=''></td>
-        </tr>
-        <tr>
-            <td>New Group Description:</td>
-            <td><input type='text' name='updateGroupDescription' value=''></td>
-        </tr>
         <tr>
             <td><input name="submit" type="submit" value="submit"/></td>
         </tr>
