@@ -49,4 +49,9 @@ public class SubjectServiceImpl implements SubjectService{
         subjectRepository.deleteAll();
     }
 
+    @Override
+    public List<Subject> findByIdLike(Long id) {
+        return subjectRepository.findByIdLike(id);
+    }
+
 }

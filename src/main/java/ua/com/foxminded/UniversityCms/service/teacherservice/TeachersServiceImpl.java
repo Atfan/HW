@@ -6,6 +6,7 @@ import ua.com.foxminded.UniversityCms.dao.teacher.TeacherRepository;
 import ua.com.foxminded.UniversityCms.model.Teacher;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TeachersServiceImpl implements TeachersService{
@@ -46,6 +47,11 @@ public class TeachersServiceImpl implements TeachersService{
     @Override
     public List<Teacher> findByFirstNameAndLastNameLike(String firstName, String lastName) {
         return teacherRepository.findByFirstNameAndLastNameLike(firstName,lastName);
+    }
+
+    @Override
+    public Optional<Teacher> findById(Long id) {
+        return teacherRepository.findById(id);
     }
 
 }

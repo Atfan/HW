@@ -55,7 +55,7 @@ public class TeacherSubjectController {
             if (addSubject.isPresent() && addTeacher.isPresent()) {
                 addSubject.get().setTeacher(addTeacher.get());
                 subjectService.save(addSubject.get());
-            }
+          }
         }
 
         model.addAttribute("subjects", subjectService.findAll());
@@ -86,6 +86,37 @@ public class TeacherSubjectController {
         model.addAttribute("subjects", subjectService.findAll());
         model.addAttribute("teachers", teachersService.findAll());
         return "reassignTeacherToSubject";
+    }
+
+    @GetMapping(value = "/teachersSubjects")
+    public String getTeachersSubjectsPage(Model model) {
+        List<Teacher> teachers = teachersService.findAll();
+        Optional<Teacher> findTeacher = Optional.ofNullable(teachers.get(0));
+
+        if (findTeacher.isPresent()) {
+            Long teacherId = findTeacher.get().getId();
+            model.addAttribute("subjects", subjectService.findByIdLike(teacherId));
+            String teachersInfo = findTeacher.get().getFirstName()
+                    + " " + findTeacher.get().getLastName();
+            model.addAttribute("teachersInfo", teachersInfo);
+        }
+        model.addAttribute("teachers", teachersService.findAll());
+        return "teachersSubjects";
+    }
+
+    @RequestMapping(value = "/teacherSubjects/choiceTeacher", method = RequestMethod.POST)
+    public String choiseTeacherPage(@RequestParam("teacherId") Long teacherId,
+                                         Model model) {
+
+        Optional<Teacher> findTeacher = teachersService.findById(teacherId);
+        if (findTeacher.isPresent()) {
+            String teachersInfo = findTeacher.get().getFirstName()
+                    + " " + findTeacher.get().getLastName();
+            model.addAttribute("teachersInfo", teachersInfo);
+        }
+        model.addAttribute("subjects", subjectService.findByIdLike(teacherId));
+        model.addAttribute("teachers", teachersService.findAll());
+        return "teachersSubjects";
     }
 
 }

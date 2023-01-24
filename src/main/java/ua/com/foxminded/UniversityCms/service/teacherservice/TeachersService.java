@@ -3,6 +3,7 @@ package ua.com.foxminded.UniversityCms.service.teacherservice;
 import ua.com.foxminded.UniversityCms.model.Teacher;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TeachersService {
     void save(Teacher teacher) ;
@@ -19,4 +20,5 @@ public interface TeachersService {
 
     List<Teacher> findByFirstNameAndLastNameLike(String firstName, String lastName);
 
+    Optional<Teacher> findById(Long id);
 }
