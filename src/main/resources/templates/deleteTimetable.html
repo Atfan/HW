@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:utext="${title}"></title>
+</head>
+<body>
+<th:block th:include="/fragments/menu"> </th:block>
+
+<th:block th:include="/fragments/menu1"> </th:block>
+
+
+<h3>Enter timetable for delete:</h3>
+<form name='deleteTimetable' th:action="@{/timetable/delete}" method='POST'>
+    <table>
+        <tr>
+            <td>Timetables:</td>
+            <td>
+                <select name="timetableId">
+                    <option th:each="timetable : ${timetables}"
+                            th:value="${timetable.id}"
+                            th:text="${timetable.dateOfDay + ' ' + timetable.pairsNumber + ' ' +
+                    timetable.auditory + ' ' + timetable.subjectId.getSubjectName() + ' ' +
+                    timetable.groupId.getGroupName() + ' ' +
+                    timetable.teacherId.getFirstName() + ' ' + timetable.teacherId.getLastName()}">
+                        ...</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td><input name="submit" type="submit" value="submit"/></td>
+        </tr>
+    </table>
+</form>
+
+</body>
+
+</html>

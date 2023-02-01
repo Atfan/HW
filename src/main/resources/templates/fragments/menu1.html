@@ -49,4 +49,20 @@
 
   <a th:if="${#request.userPrincipal != null}" > &nbsp; | &nbsp; </a>
 
+  <a th:if="${#request.userPrincipal != null}" th:href="@{/timetable/get}">List of Timetables </a>
+
+  <a th:if="${#request.userPrincipal != null}" > &nbsp; | &nbsp; </a>
+
+  <a th:if="${#request.userPrincipal != null}" th:href="@{/createTimetable}">Create Timetable </a>
+
+  <a th:if="${#request.userPrincipal != null}" > &nbsp; | &nbsp; </a>
+
+  <a th:if="${#request.userPrincipal != null}" th:href="@{/updateTimetable}">Update Timetable </a>
+
+  <a th:if="${#request.userPrincipal != null}" > &nbsp; | &nbsp; </a>
+
+  <a th:if="${#request.userPrincipal != null}" th:href="@{/deleteTimetable}">Delete Timetable </a>
+
+  <a th:if="${#request.userPrincipal != null}" > &nbsp; | &nbsp; </a>
+
 </div>

@@ -3,6 +3,7 @@ package ua.com.foxminded.UniversityCms.service.timetableservice;
 import ua.com.foxminded.UniversityCms.model.Timetable;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TimetableService {
     void save(Timetable timetable) ;
@@ -19,4 +20,5 @@ public interface TimetableService {
 
     List<Timetable> findDayTimetableForStudent(long id);
 
+    Optional<Timetable> findById(Long id);
 }
