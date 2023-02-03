@@ -9,7 +9,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import ua.com.foxminded.UniversityCms.service.Endpoints;
 import ua.com.foxminded.UniversityCms.service.userdetailsservice.UserDetailsServiceImpl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static ua.com.foxminded.UniversityCms.service.Endpoints.*;
 
 @Configuration
 @EnableWebSecurity
@@ -39,34 +45,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
 
         http.authorizeRequests().mvcMatchers("/", "/login", "/logout").permitAll();
+
         http.authorizeRequests().mvcMatchers("/userInfo", "/studentsInGroup", "/studentsGroups/choiceGroup")
                 .access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_STUDENT', 'ROLE_TEACHER', 'ROLE_STUFF')");
-        http.authorizeRequests().mvcMatchers(
-                "/admin",
-                "/subjects/create",
-                "/subjects/update",
-                "/subjects/delete",
-                "/updateSubject",
-                "/deleteSubject",
-                "/createCourse",
-                "/groups/create",
-                "/groups/update",
-                "/groups/delete",
-                "/updateGroup",
-                "/deleteGroup",
-                "/createGroup",
-                "/studentsGroups/assign",
-                "/studentsGroups/reassign",
-                "/assignStudents",
-                "/reassignStudents",
-                "/timetable/get",
-                "/createTimetable",
-                "/updateTimetable",
-                "/deleteTimetable",
-                "/timetable/create",
-                "/timetable/update",
-                "/timetable/delete"
-                ).access("hasAnyRole('ROLE_ADMIN', 'ROLE_STUFF')");
+
+        List<Endpoints> endpoints = Endpoints.getEndpointForAdminStuff();
+
+        for (var endpoint : endpoints) {
+            http.authorizeRequests().mvcMatchers(endpoint.getEndpoint())
+                    .access("hasAnyRole('ROLE_ADMIN', 'ROLE_STUFF')");
+        }
+
         http.authorizeRequests().mvcMatchers("/students/get", "/groups/get").access("hasAnyRole('ROLE_STUDENT', 'ROLE_ADMIN', 'ROLE_STUFF')");
         http.authorizeRequests().mvcMatchers("/teachers/get").access("hasAnyRole('ROLE_TEACHER', 'ROLE_ADMIN', 'ROLE_STUFF')");
         http.authorizeRequests().mvcMatchers("/subjects/get").access("hasAnyRole('ROLE_TEACHER', 'ROLE_ADMIN', 'ROLE_STUDENT', 'ROLE_STUFF')");
