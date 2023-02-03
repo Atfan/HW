@@ -8,6 +8,7 @@ import ua.com.foxminded.UniversityCms.model.Timetable;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TimetableServiceImpl implements TimetableService{
@@ -55,6 +56,11 @@ public class TimetableServiceImpl implements TimetableService{
             throwables.printStackTrace();
             return new ArrayList<>();
         }
+    }
+
+    @Override
+    public Optional<Timetable> findById(Long id) {
+        return timetableRepository.findById(id);
     }
 
 }
