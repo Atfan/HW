@@ -16,6 +16,7 @@ import ua.com.foxminded.UniversityCms.utils.TestConteinersConfiguration;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
@@ -49,5 +50,129 @@ public class GroupServiceImplTest {
                 "Execute method save from groups");
     }
 
+    @Test
+    void update_ShuldUpdateRowInTheTableGroups_WhenCalled() {
+        List<Group> expectedResult = new ArrayList<>();
+        Group addGroup = new Group();
+        addGroup.setId(1L);
+        addGroup.setGroupName("rz-20");
+        addGroup.setDescription("This is rz-20 group");
+        expectedResult.add(addGroup);
+
+        groupRepository.save(addGroup);
+        List<Group> actualResult = groupRepository.findAll();
+
+        assertEquals(expectedResult,
+                actualResult,
+                "Execute method save from groups");
+
+        addGroup.setGroupName("aa-55");
+        addGroup.setDescription("This is aa-55 group");
+        expectedResult.clear();
+        expectedResult.add(addGroup);
+
+        groupRepository.save(addGroup);
+        actualResult = groupRepository.findAll();
+
+        assertEquals(expectedResult,
+                actualResult,
+                "Execute method update from groups");
+
+    }
+
+    @Test
+    void delete_ShuldDeleteExistenRowInTheTableGroups_WhenCalled() {
+        List<Group> expectedResult = new ArrayList<>();
+        Group addGroup = new Group();
+        addGroup.setId(1L);
+        addGroup.setGroupName("rz-20");
+        addGroup.setDescription("This is rz-20 group");
+        expectedResult.add(addGroup);
+        groupRepository.save(addGroup);
+
+        addGroup = new Group();
+        addGroup.setId(2L);
+        addGroup.setGroupName("aa-55");
+        addGroup.setDescription("This is aa-55 group");
+        expectedResult.add(addGroup);
+        groupRepository.save(addGroup);
+
+        List<Group> actualResult = groupRepository.findAll();
+
+        assertEquals(expectedResult,
+                actualResult,
+                "Execute method save from groups");
+
+        expectedResult.remove(addGroup);
+        groupRepository.delete(addGroup);
+
+        actualResult = groupRepository.findAll();
+
+        assertEquals(expectedResult,
+                actualResult,
+                "Execute method delete from groups");
+
+    }
+
+    @Test
+    void deleteAll_ShuldDeleteAllRowsInTheTableGroups_WhenCalled() {
+        List<Group> expectedResult = new ArrayList<>();
+        Group addGroup = new Group();
+        addGroup.setId(1L);
+        addGroup.setGroupName("rz-20");
+        addGroup.setDescription("This is rz-20 group");
+        expectedResult.add(addGroup);
+        groupRepository.save(addGroup);
+
+        addGroup = new Group();
+        addGroup.setId(2L);
+        addGroup.setGroupName("aa-55");
+        addGroup.setDescription("This is aa-55 group");
+        expectedResult.add(addGroup);
+        groupRepository.save(addGroup);
+
+        List<Group> actualResult = groupRepository.findAll();
+
+        assertEquals(expectedResult,
+                actualResult,
+                "Execute method save from groups");
+
+        groupRepository.deleteAll();
+
+        assertThat(groupRepository.findAll()).isEmpty();
+
+    }
+
+    @Test
+    void findByGroupNameLike_ShuldReturnGroupWithExistenName_WhenCalled() {
+        List<Group> expectedResult = new ArrayList<>();
+        Group addGroup = new Group();
+        addGroup.setId(1L);
+        addGroup.setGroupName("rz-20");
+        addGroup.setDescription("This is rz-20 group");
+        expectedResult.add(addGroup);
+        groupRepository.save(addGroup);
+
+        addGroup = new Group();
+        addGroup.setId(2L);
+        addGroup.setGroupName("aa-55");
+        addGroup.setDescription("This is aa-55 group");
+        expectedResult.add(addGroup);
+        groupRepository.save(addGroup);
+
+        List<Group> actualResult = groupRepository.findAll();
+
+        assertEquals(expectedResult,
+                actualResult,
+                "Execute method save from groups");
+
+        expectedResult.clear();
+        expectedResult.add(addGroup);
+        actualResult = groupRepository.findByGroupNameLike("aa-55");
+
+        assertEquals(expectedResult,
+                actualResult,
+                "Execute method findByGroupNameLike from groups");
+    }
 
 }

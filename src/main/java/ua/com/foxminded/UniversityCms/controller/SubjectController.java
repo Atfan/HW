@@ -23,6 +23,12 @@ public class SubjectController {
         return "subjects";
     }
 
+    @RequestMapping(value = "/briefsubjects", method = RequestMethod.GET)
+    public String getBriefSubjects(Model model) {
+        model.addAttribute("subjects", subjectService.findAll());
+        return "subjects";
+    }
+
     @RequestMapping(value = "/subjects/update", method = RequestMethod.POST)
     public String updateSubject(@RequestParam("subjectName") String subjectName,
                                 @RequestParam("updateSubjectName") String updateSubjectName,
