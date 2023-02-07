@@ -9,13 +9,13 @@
 
   <a th:if="${#request.userPrincipal != null}" > &nbsp; | &nbsp; </a>
 
-  <a th:if="${#request.isUserInRole('ROLE_ANONIM')}" th:href="@{/briefsubjects}"> List of Courses </a>
+  <a th:if="${#request.isUserInRole('ROLE_NULL')}" th:href="@{/briefsubjects}"> List of Courses </a>
 
-  <a th:if="${#request.isUserInRole('ROLE_ANONIM')}" > &nbsp; | &nbsp; </a>
+  <a th:if="${#request.isUserInRole('ROLE_NULL')}" > &nbsp; | &nbsp; </a>
 
-  <a th:if="${#request.userPrincipal != null && !#request.isUserInRole('ROLE_ANONIM')}" th:href="@{/studentsInGroup}"> List of Students in current Group </a>
+  <a th:if="${#request.userPrincipal != null && !#request.isUserInRole('ROLE_NULL')}" th:href="@{/studentsInGroup}"> List of Students in current Group </a>
 
-  <a th:if="${#request.userPrincipal != null && !#request.isUserInRole('ROLE_ANONIM')}" > &nbsp; | &nbsp; </a>
+  <a th:if="${#request.userPrincipal != null && !#request.isUserInRole('ROLE_NULL')}" > &nbsp; | &nbsp; </a>
 
   <a th:if="${#request.isUserInRole('ROLE_TEACHER')}" th:href="@{/teachersSubjects}"> List of Teachers Subjects </a>
 
