@@ -81,7 +81,7 @@ public class SubjectControllerTest {
                 .andExpect(status().is4xxClientError());
     }
 
-    @WithMockUser(username="anonim", password="123",roles="NULL")
+    @WithMockUser(username="anonim", password="123",roles="DEFAULT")
     @Test
     public void testBriefSubjectsPage_ShouldReturnOK_WhenRequestSendFromAnonim() throws Exception {
 
