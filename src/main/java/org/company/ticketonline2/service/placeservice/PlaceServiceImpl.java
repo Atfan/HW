@@ -1,7 +1,6 @@
 package org.company.ticketonline2.service.placeservice;
 
 import org.company.ticketonline2.dao.place.PlaceRepository;
-import org.company.ticketonline2.dto.PlaceDTO;
 import org.company.ticketonline2.model.Place;
 import org.company.ticketonline2.service.mapper.PlaceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,42 +12,34 @@ import java.util.Optional;
 
 @Service
 public class PlaceServiceImpl implements PlaceService {
-    PlaceMapper placeMapper;
 
     @Autowired
     private PlaceRepository placeRepository;
 
     @Override
-    public void save(PlaceDTO data) {
-        placeRepository.save(placeMapper.toEntity(data));
+    public void save(Place data) {
+        placeRepository.save(data);
     }
 
     @Override
-    public int[] saveToList(List<PlaceDTO> arrData) {
-        for(PlaceDTO dto : arrData) {
-            placeRepository.save(placeMapper.toEntity(dto));
-        }
+    public int[] saveToList(List<Place> arrData) {
+        placeRepository.saveAll(arrData);
         return new int[1];
     }
 
     @Override
-    public void update(PlaceDTO data) {
-        placeRepository.save(placeMapper.toEntity(data));
+    public void update(Place data) {
+        placeRepository.save(data);
     }
 
     @Override
-    public void delete(PlaceDTO data) {
-        placeRepository.delete(placeMapper.toEntity(data));
+    public void delete(Place data) {
+        placeRepository.delete(data);
     }
 
     @Override
-    public List<PlaceDTO> toList() {
-        List<Place> places= placeRepository.findAll();
-        List<PlaceDTO> dtos = new ArrayList<>();
-        for(Place place : places) {
-            dtos.add(placeMapper.toDto(place));
-        }
-        return dtos;
+    public List<Place> toList() {
+        return placeRepository.findAll();
     }
 
     @Override
@@ -57,8 +48,8 @@ public class PlaceServiceImpl implements PlaceService {
     }
 
     @Override
-    public PlaceDTO findById(Long id) {
+    public Place findById(Long id) {
         Optional<Place> byId = placeRepository.findById(id);
-        return byId.map(place -> placeMapper.toDto(place)).orElse(null);
+        return byId.orElse(null);
     }
 }

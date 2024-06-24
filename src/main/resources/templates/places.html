@@ -5,17 +5,12 @@
     <title> Groups Get </title>
 </head>
 <body>
-<div th:fragment="content" th:with="roles=${roles}">
-    <!-- Вставка фрагмента -->
-    <div th:replace="/fragments/menu :: fragmentContent"></div>
-</div>
+<th:block th:include="/fragments/menu"></th:block>
 
     <div th:if="${roles.contains('ROLE_ADMIN') || roles.contains('ROLE_MANAGER')}">
 
-        <div th:fragment="content" th:with="roles=${roles}">
-            <!-- Вставка фрагмента -->
-            <div th:replace="/fragments/menu1 :: fragmentContent1"></div>
-        </div>
+
+        <th:block th:include="/fragments/menu1"></th:block>
     </div>
 
 <table border = "1">
@@ -25,8 +20,8 @@
         <th>Адресс</th>
     </tr>
     <tr th:each = "place : ${places}">
-        <td th:utext="${place.placeName}">...</td>
-        <td th:utext="${place.address}">...</td>
+        <td th:utext="${place.getName()}">...</td>
+        <td th:utext="${place.getAddress()}">...</td>
     </tr>
 </table>
 

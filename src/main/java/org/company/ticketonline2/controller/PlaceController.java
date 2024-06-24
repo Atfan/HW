@@ -1,7 +1,6 @@
 package org.company.ticketonline2.controller;
 
-import org.company.ticketonline2.dto.PlaceDTO;
-import org.company.ticketonline2.service.mapper.PlaceMapper;
+import org.company.ticketonline2.model.Place;
 import org.company.ticketonline2.service.placeservice.PlaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,8 +23,6 @@ public class PlaceController {
     @Autowired
     private PlaceService placeService;
 
-
-    private PlaceMapper placeMapper;
 
     @RequestMapping(value = "/places", method= RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -50,9 +47,9 @@ public class PlaceController {
                               @RequestParam("namePlace") String namePlace,
                               @RequestParam("address") String address,
                               Model model, Principal principal) {
-        PlaceDTO findPlace = placeService.findById(idPlace);
+        Place findPlace = placeService.findById(idPlace);
 
-        findPlace.setPlaceName(namePlace);
+        findPlace.setName(namePlace);
         findPlace.setAddress(address);
         placeService.update(findPlace);
 
@@ -76,8 +73,8 @@ public class PlaceController {
             @RequestParam("namePlace") String namePlace,
             @RequestParam("address") String address,
             Model model, Principal principal) {
-        PlaceDTO addPlace = new PlaceDTO();
-        addPlace.setPlaceName(namePlace);
+        Place addPlace = new Place();
+        addPlace.setName(namePlace);
         addPlace.setAddress(address);
 
         placeService.save(addPlace);
@@ -98,7 +95,7 @@ public class PlaceController {
     @RequestMapping(value = "/places/delete", method = RequestMethod.POST)
     public String deletePlace(@RequestParam("idPlace") Long idPlace,Model model,
                               Principal principal) {
-        PlaceDTO delPlace = placeService.findById(idPlace);
+        Place delPlace = placeService.findById(idPlace);
         if (delPlace!=null) {
             placeService.delete(delPlace);
         }

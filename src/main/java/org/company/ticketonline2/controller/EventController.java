@@ -4,6 +4,7 @@ import org.company.ticketonline2.dto.EventDTO;
 import org.company.ticketonline2.dto.PlaceDTO;
 import org.company.ticketonline2.dto.TicketPackDTO;
 import org.company.ticketonline2.model.Event;
+import org.company.ticketonline2.model.Place;
 import org.company.ticketonline2.service.eventdtoservice.EventDTOService;
 import org.company.ticketonline2.service.eventservice.EventService;
 import org.company.ticketonline2.service.mapper.PlaceMapper;
@@ -29,8 +30,8 @@ public class EventController {
     @Autowired
     private EventService eventService;
 
-    private PlaceMapper placeMapper;
-    private EventDTOService eventMapper;
+    @Autowired
+    private EventDTOService eventDTOService;
 
     @RequestMapping(value = "/events", method= RequestMethod.GET)
     public String listEvent(Model model, Principal principal){
@@ -52,13 +53,13 @@ public class EventController {
     @RequestMapping(value = "/events/update", method = RequestMethod.POST)
     public String updateGroup(@RequestParam("idEvent") Long idEvent,
                               @RequestParam("nameEvent") String nameEvent,
-                              @RequestParam("placeEvent") PlaceDTO placeEvent,
+                              @RequestParam("placeEvent") Place placeEvent,
                               @RequestParam("dateEvent") Date dateEvent,
                               Model model, Principal principal) {
         Event findEvent = eventService.findById(idEvent);
 
         findEvent.setName(nameEvent);
-        findEvent.setPlace(placeMapper.toEntity(placeEvent));
+        findEvent.setPlace( placeEvent);
         findEvent.setDate(dateEvent);
         eventService.update(findEvent);
 
@@ -89,7 +90,7 @@ public class EventController {
         addEvent.setPlace(placeEvent);
         addEvent.setDate(dateEvent);
         addEvent.setTickets(tickets);
-        eventMapper.addEventDTO(addEvent);
+        eventDTOService.addEventDTO(addEvent);
 
         User loginedUser = (User) ((Authentication) principal).getPrincipal();
 
