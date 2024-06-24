@@ -5,6 +5,12 @@
 
   &nbsp; | &nbsp;
 
+  <a th:href="@{/events}">Event</a>
+  <a> &nbsp; | &nbsp;&nbsp; </a>
+  <a th:href="@{/places}">place</a>
+
+  <a> &nbsp; | &nbsp;&nbsp; </a>
+
   <a th:if="${#request.userPrincipal != null}" th:href="@{/userInfo}">Info </a>
 
   <a th:if="${#request.userPrincipal != null}" > &nbsp; | &nbsp; </a>

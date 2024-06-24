@@ -1,0 +1,6 @@
+theater
+opera
+palace
+ground
+club
+discohouse

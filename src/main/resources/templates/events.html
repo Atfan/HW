@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html
+    <html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title> Groups Get </title>
+</head>
+<body>
+<div th:fragment="content" th:with="roles=${roles}">
+    <!-- Вставка фрагмента -->
+    <div th:replace="/fragments/menu :: fragmentContent"></div>
+</div>
+
+    <div th:if="${roles.contains('ROLE_ADMIN') || roles.contains('ROLE_STUFF')}">
+
+        <div th:fragment="content" th:with="roles=${roles}">
+            <!-- Вставка фрагмента -->
+            <div th:replace="/fragments/menu1 :: fragmentContent1"></div>
+        </div>
+    </div>
+
+<table border = "1">
+
+    <tr>
+        <th>Название группы</th>
+        <th>Описание</th>
+    </tr>
+    <tr th:each = "group : ${groups}">
+        <td th:utext="${group.groupName}">...</td>
+        <td th:utext="${group.description}">...</td>
+    </tr>
+</table>
+
+</body>
+</html>

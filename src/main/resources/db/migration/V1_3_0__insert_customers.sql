@@ -1,0 +1,13 @@
+-- insert into customers (id, first_name, last_name, email, phone)
+-- values  (1, 'John', 'Doe', 'john.doe@example.com', '1234567890'),
+--         (2, 'Jane', 'Smith', 'jane.smith@example.com', '0987654321'),
+--         (3, 'Alice', 'Johnson', 'alice.johnson@example.com', '1112223333'),
+--         (4, 'Bob', 'Brown', 'bob.brown@example.com', '4445556666'),
+--         (5, 'Charlie', 'Davis', 'charlie.davis@example.com', '7778889999');
+--
+-- insert into tickets (id, cost, numbr, status, customer_id, event_id)
+-- values  (1, 1000,1, 'SOLD', 1, 1),
+--         (2, 1000,2, 'SOLD', 3, 1),
+--         (3, 1000,3, 'FREE', NULL, 1),
+--         (4, 1000,4, 'SOLD', 4, 1),
+--         (5, 1000,5, 'FREE', NULL, 1);

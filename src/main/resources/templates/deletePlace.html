@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title> Update Group </title>
+</head>
+<body>
+<div th:fragment="content" th:with="roles=${roles}">
+    <!-- Вставка фрагмента -->
+    <div th:replace="/fragments/menu :: fragmentContent"></div>
+</div>
+
+<div th:fragment="content" th:with="roles=${roles}">
+    <!-- Вставка фрагмента -->
+    <div th:replace="/fragments/menu1 :: fragmentContent1"></div>
+</div>
+
+<h3>Enter course name:</h3>
+<form name='deletePlace' th:action="@{/places/delete}" method='POST'>
+    <table>
+        <tr>
+            <select name="placeId">
+                <option th:each="place : ${places}"
+                        th:value="${places.idPlace}"
+                        th:text="${places.groupName}">
+                    ...</option>
+            </select>
+        </tr>
+
+        <tr>
+            <td><input name="submit" type="submit" value="submit"/></td>
+        </tr>
+    </table>
+</form>
+
+</body>
+
+</html>

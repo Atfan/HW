@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title> Create Group </title>
+</head>
+<body>
+<div th:fragment="content" th:with="roles=${roles}">
+    <!-- Вставка фрагмента -->
+    <div th:replace="/fragments/menu :: fragmentContent"></div>
+</div>
+
+<div th:fragment="content" th:with="roles=${roles}">
+    <!-- Вставка фрагмента -->
+    <div th:replace="/fragments/menu1 :: fragmentContent1"></div>
+</div>
+
+
+<h3>Enter course name:</h3>
+<form name='createGroup' th:action="@{/groups/create}" method='POST'>
+    <table>
+        <tr>
+            <td>Group Name:</td>
+            <td><input type='text' name='groupName' value=''></td>
+        </tr>
+        <tr>
+            <td>Group Description:</td>
+            <td><input type='text' name='groupDescription' value=''></td>
+        </tr>
+        <tr>
+            <td><input name="submit" type="submit" value="submit"/></td>
+        </tr>
+    </table>
+</form>
+
+</body>
+
+</html>
