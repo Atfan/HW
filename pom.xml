@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>ua.com.foxminded</groupId>
-	<artifactId>UniversityCms</artifactId>
+	<artifactId>TicketOnline</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>UniversityCms</name>
 	<description>University timetable</description>
@@ -31,6 +31,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>

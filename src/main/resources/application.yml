@@ -1,13 +1,13 @@
 spring:
   datasource:
-      url: jdbc:postgresql://localhost:5434/University
-      username: postgres
+      url: jdbc:postgresql://localhost:5436/University
+      username: sa
       password: admin
       driverClassName: org.postgresql.Driver
 
   flyway:
       enabled: true
-      user: postgres
+      user: sa
       password: admin
       schemas: public
-      url: jdbc:postgresql://localhost:5434/University
+      url: jdbc:postgresql://localhost:5436/University
