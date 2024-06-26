@@ -1,68 +1,8 @@
 <div xmlns:th="http://www.thymeleaf.org"
      style="border: 1px solid #ccc;padding:5px;margin-bottom:20px;">
 
-  <a th:if="${#request.userPrincipal != null}" th:href="@{/createCourse}">create course</a>
 
-  <a th:if="${#request.userPrincipal != null}" > &nbsp; | &nbsp; </a>
-
-  <a th:if="${#request.userPrincipal != null}" th:href="@{/subjects/get}">read list of courses </a>
-
-  <a th:if="${#request.userPrincipal != null}" > &nbsp; | &nbsp; </a>
-
-  <a th:if="${#request.userPrincipal != null}" th:href="@{/updateSubject}">update course </a>
-
-  <a th:if="${#request.userPrincipal != null}" > &nbsp; | &nbsp; </a>
-
-  <a th:if="${#request.userPrincipal != null}" th:href="@{/deleteSubject}">delete course </a>
-
-  <a th:if="${#request.userPrincipal != null}" > &nbsp; | &nbsp; </a>
-
-  <a th:if="${#request.isUserInRole('ROLE_STUFF')}" th:href="@{/assignTeacherToSubject}">assign course </a>
+  <a th:if="${#request.isUserInRole('ROLE_MANAGER') || #request.isUserInRole('ROLE_ADMIN')}" th:href="${create}">Create </a>
 
   <a th:if="${#request.isUserInRole('ROLE_STUFF')}" > &nbsp; | &nbsp; </a>
-
-  <a th:if="${#request.isUserInRole('ROLE_STUFF')}" th:href="@{/reassignTeacherToSubject}">reassign course </a>
-
-  <a th:if="${#request.isUserInRole('ROLE_STUFF')}" > &nbsp; | &nbsp; </a>
-
-  <a th:if="${#request.userPrincipal != null}" th:href="@{/createGroup}">create group</a>
-
-  <a th:if="${#request.userPrincipal != null}" > &nbsp; | &nbsp; </a>
-
-  <a th:if="${#request.userPrincipal != null}" th:href="@{/groups/get}">read list of groups </a>
-
-  <a th:if="${#request.userPrincipal != null}" > &nbsp; | &nbsp; </a>
-
-  <a th:if="${#request.userPrincipal != null}" th:href="@{/updateGroup}">update group </a>
-
-  <a th:if="${#request.userPrincipal != null}" > &nbsp; | &nbsp; </a>
-
-  <a th:if="${#request.userPrincipal != null}" th:href="@{/deleteGroup}">delete group </a>
-
-  <a th:if="${#request.userPrincipal != null}" > &nbsp; | &nbsp; </a>
-
-  <a th:if="${#request.userPrincipal != null}" th:href="@{/assignStudents}">assign Student to Group </a>
-
-  <a th:if="${#request.userPrincipal != null}" > &nbsp; | &nbsp; </a>
-
-  <a th:if="${#request.userPrincipal != null}" th:href="@{/reassignStudents}">reassign Student to Group </a>
-
-  <a th:if="${#request.userPrincipal != null}" > &nbsp; | &nbsp; </a>
-
-  <a th:if="${#request.userPrincipal != null}" th:href="@{/timetable/get}">List of Timetables </a>
-
-  <a th:if="${#request.userPrincipal != null}" > &nbsp; | &nbsp; </a>
-
-  <a th:if="${#request.userPrincipal != null}" th:href="@{/createTimetable}">Create Timetable </a>
-
-  <a th:if="${#request.userPrincipal != null}" > &nbsp; | &nbsp; </a>
-
-  <a th:if="${#request.userPrincipal != null}" th:href="@{/updateTimetable}">Update Timetable </a>
-
-  <a th:if="${#request.userPrincipal != null}" > &nbsp; | &nbsp; </a>
-
-  <a th:if="${#request.userPrincipal != null}" th:href="@{/deleteTimetable}">Delete Timetable </a>
-
-  <a th:if="${#request.userPrincipal != null}" > &nbsp; | &nbsp; </a>
-
 </div>

@@ -8,6 +8,7 @@ import org.company.ticketonline2.model.Place;
 import org.company.ticketonline2.service.eventdtoservice.EventDTOService;
 import org.company.ticketonline2.service.eventservice.EventService;
 import org.company.ticketonline2.service.mapper.PlaceMapper;
+import org.company.ticketonline2.service.placeservice.PlaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -32,6 +34,8 @@ public class EventController {
 
     @Autowired
     private EventDTOService eventDTOService;
+    @Autowired
+    private PlaceService placeService;
 
     @RequestMapping(value = "/events", method= RequestMethod.GET)
     public String listEvent(Model model, Principal principal){
@@ -45,6 +49,7 @@ public class EventController {
             roles.append(authority.getAuthority());
         }
 
+        model.addAttribute("create","/createEvent");
         model.addAttribute("roles", roles.toString());
 
         return "events";
@@ -100,6 +105,17 @@ public class EventController {
             roles.append(authority.getAuthority());
         }
 
+        List<Place> places=placeService.toList();
+        List<PlaceDTO> placeDTOs=new ArrayList<>();
+        for(Place place:places){
+            PlaceDTO placeDTO=new PlaceDTO();
+            placeDTO.setId(place.getId());
+            placeDTO.setPlaceName(place.getName());
+            placeDTO.setAddress(place.getAddress());
+            placeDTOs.add(placeDTO);
+        }
+
+        model.addAttribute("placeDTOs", placeDTOs);
         model.addAttribute("roles", roles.toString());
 
         return "createEvent";
@@ -113,6 +129,7 @@ public class EventController {
            eventService.delete(delEvent);
         }
 
+
         model.addAttribute("events", eventService.toList());
 
         User loginedUser = (User) ((Authentication) principal).getPrincipal();
@@ -125,9 +142,9 @@ public class EventController {
 
         model.addAttribute("roles", roles.toString());
 
-        return "deleteEvents";    }
+        return "deleteEvent";    }
 
-    @GetMapping(value = "/createEvent")
+    @RequestMapping(value = "/createEvent", method= RequestMethod.GET)
     public String createGroupPage(Model model, Principal principal) {
 
         User loginedUser = (User) ((Authentication) principal).getPrincipal();
@@ -138,12 +155,23 @@ public class EventController {
             roles.append(authority.getAuthority());
         }
 
+        List<Place> places=placeService.toList();
+        List<PlaceDTO> placeDTOs=new ArrayList<>();
+        for(Place place:places){
+            PlaceDTO placeDTO=new PlaceDTO();
+            placeDTO.setId(place.getId());
+            placeDTO.setPlaceName(place.getName());
+            placeDTO.setAddress(place.getAddress());
+            placeDTOs.add(placeDTO);
+        }
+        model.addAttribute("create","/createEvent");
+        model.addAttribute("placeDTOs", placeDTOs);
         model.addAttribute("roles", roles.toString());
 
         return "createEvent";
     }
 
-    @GetMapping(value = "/updateEvent")
+    @RequestMapping(value = "/updateEvent",method= RequestMethod.GET)
     public String updateGroupPage(Model model, Principal principal) {
         model.addAttribute("events", eventService.toList());
 
@@ -160,7 +188,7 @@ public class EventController {
         return "updateEvent";
     }
 
-    @GetMapping(value = "/deleteEvent")
+    @RequestMapping(value = "/deleteEvent", method= RequestMethod.GET)
     public String deleteGroupPage(Model model, Principal principal) {
         model.addAttribute("events", eventService.toList());
 

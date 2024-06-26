@@ -12,13 +12,14 @@ public enum Endpoints {
     EVENTS_CREATE("/events/create"),
     EVENTS_UPDATE("/events/update"),
     EVENTS_DELETE("/events/delete"),
+    EVENT_CREATE_VIEW("/createEvent"),
     EVENT_UPDATE_VIEW("/updateEvent"),
     EVENT_DELETE_VIEW("/deleteEvent"),
-    //TICKETS_VIEW("events/{id}/tickets"),
     PLACES_VIEW("/places"),
     PLACES_CREATE("/places/create"),
     PLACES_UPDATE("/places/update"),
     PLACES_DELETE("/places/delete"),
+    PLACE_CREATE_VIEW("/createPlace"),
     PlACE_UPDATE_VIEW("/updatePlace"),
     PLACE_DELETE_VIEW("/deletePlace"),
     CUSTOMERS_VIEW("/customers"),
@@ -47,13 +48,19 @@ public enum Endpoints {
         return endpoints;
     }
 
-    static public List<Endpoints> getEndpointForAdminStuff() {
+    static public List<Endpoints> getEndpointForAdminManager() {
         List<Endpoints> endpoints = new ArrayList<>();
         endpoints.add(ADMIN_VIEW);
         endpoints.add(EVENTS_VIEW);
         endpoints.add(EVENTS_CREATE);
         endpoints.add(EVENTS_UPDATE);
         endpoints.add(EVENTS_DELETE);
+        endpoints.add(EVENT_CREATE_VIEW);
+        endpoints.add(EVENT_UPDATE_VIEW);
+        endpoints.add(EVENT_DELETE_VIEW);
+        endpoints.add(PLACE_CREATE_VIEW);
+        endpoints.add(PlACE_UPDATE_VIEW);
+        endpoints.add(PLACE_DELETE_VIEW);
         endpoints.add(PLACES_VIEW);
         endpoints.add(PLACES_CREATE);
         endpoints.add(PLACES_UPDATE);
@@ -64,10 +71,7 @@ public enum Endpoints {
         endpoints.add(CUSTOMERS_DELETE);
         endpoints.add(CUSTOMER_UPDATE_VIEW);
         endpoints.add(CUSTOMER_DELETE_VIEW);
-        endpoints.add(CUSTOMER_UPDATE_VIEW);
-        endpoints.add(CUSTOMER_DELETE_VIEW);
-        endpoints.add(CUSTOMER_UPDATE_VIEW);
-        endpoints.add(CUSTOMER_DELETE_VIEW);
+
 
         return endpoints;
     }

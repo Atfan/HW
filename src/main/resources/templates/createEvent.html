@@ -7,25 +7,40 @@
 <body>
 <div th:fragment="content" th:with="roles=${roles}">
     <!-- Вставка фрагмента -->
-    <div th:replace="/fragments/menu :: fragmentContent"></div>
+
+    <th:block th:include="/fragments/menu"></th:block>
 </div>
 
 <div th:fragment="content" th:with="roles=${roles}">
     <!-- Вставка фрагмента -->
-    <div th:replace="/fragments/menu1 :: fragmentContent1"></div>
+
+    <th:block th:include="/fragments/menu1"></th:block>
 </div>
 
 
 <h3>Enter course name:</h3>
-<form name='createGroup' th:action="@{/groups/create}" method='POST'>
+<form name='createGroup' th:action="@{/events/create}" method='POST'>
     <table>
         <tr>
-            <td>Group Name:</td>
-            <td><input type='text' name='groupName' value=''></td>
+            <td>Event Name:</td>
+            <td><input type='text' name='eventName' value=''></td>
         </tr>
         <tr>
-            <td>Group Description:</td>
-            <td><input type='text' name='groupDescription' value=''></td>
+            <td>Place Name:</td>
+            <td> <select name="placeDTO">
+                <option th:each="placeDTO : ${placeDTOs}"
+                        th:value="${placeDTO}"
+                        th:text="${placeDTO.getPlaceName()}">
+                    ...</option>
+            </select></td>
+        </tr>
+        <tr>
+            <td>Event date:</td>
+            <td><input type='date' name='dateEvent' value=''></td>
+        </tr>
+        <tr>
+            <td>Event tickets:</td>
+            <td><input type='text' name='tickets' value=''></td>
         </tr>
         <tr>
             <td><input name="submit" type="submit" value="submit"/></td>

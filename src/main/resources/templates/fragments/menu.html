@@ -5,47 +5,22 @@
 
   &nbsp; | &nbsp;
 
-  <a th:href="@{/events}">Events</a>
-  <a> &nbsp; | &nbsp;&nbsp; </a>
-  <a th:href="@{/places}">Places</a>
-
-  <a> &nbsp; | &nbsp;&nbsp; </a>
 
   <a th:if="${#request.userPrincipal != null}" th:href="@{/userInfo}">Info </a>
 
   <a th:if="${#request.userPrincipal != null}" > &nbsp; | &nbsp; </a>
 
-  <a th:if="${#request.isUserInRole('ROLE_DEFAULT')}" th:href="@{/briefsubjects}"> List of Courses </a>
+  <a th:if="${#request.userPrincipal != null}" th:href="@{/events}">Events </a>
+
+  <a th:if="${#request.userPrincipal != null}" > &nbsp; | &nbsp; </a>
+  <a th:if="${#request.userPrincipal != null}" th:href="@{/places}">Places </a>
+
+  <a th:if="${#request.userPrincipal != null}" > &nbsp; | &nbsp; </a>
+
+
+  <a th:if="${#request.isUserInRole('ROLE_DEFAULT')}" th:href="@{/}">  </a>
 
   <a th:if="${#request.isUserInRole('ROLE_DEFAULT')}" > &nbsp; | &nbsp; </a>
-
-  <a th:if="${#request.userPrincipal != null && !#request.isUserInRole('ROLE_DEFAULT')}" th:href="@{/studentsInGroup}"> List of Students in current Group </a>
-
-  <a th:if="${#request.userPrincipal != null && !#request.isUserInRole('ROLE_DEFAULT')}" > &nbsp; | &nbsp; </a>
-
-  <a th:if="${#request.isUserInRole('ROLE_TEACHER')}" th:href="@{/teachersSubjects}"> List of Teachers Subjects </a>
-
-  <a th:if="${#request.isUserInRole('ROLE_TEACHER')}" > &nbsp; | &nbsp; </a>
-
-  <a th:if="${#request.isUserInRole('ROLE_STUDENT') || #request.isUserInRole('ROLE_ADMIN') || #request.isUserInRole('ROLE_STUFF')}" th:href="@{/students/get}">Students</a>
-
-  <a th:if="${#request.isUserInRole('ROLE_STUDENT') || #request.isUserInRole('ROLE_ADMIN') || #request.isUserInRole('ROLE_STUFF')}" > &nbsp; | &nbsp; </a>
-
-  <a th:if="${#request.isUserInRole('ROLE_STUDENT') || #request.isUserInRole('ROLE_ADMIN') || #request.isUserInRole('ROLE_STUFF')}" th:href="@{/groups/get}">Groups </a>
-
-  <a th:if="${#request.isUserInRole('ROLE_STUDENT') || #request.isUserInRole('ROLE_ADMIN') || #request.isUserInRole('ROLE_STUFF')}" > &nbsp; | &nbsp; </a>
-
-  <a th:if="${#request.isUserInRole('ROLE_TEACHER') || #request.isUserInRole('ROLE_ADMIN') || #request.isUserInRole('ROLE_STUFF')}" th:href="@{/teachers/get}">Teachers </a>
-
-  <a th:if="${#request.isUserInRole('ROLE_TEACHER') || #request.isUserInRole('ROLE_ADMIN') || #request.isUserInRole('ROLE_STUFF')}" > &nbsp; | &nbsp; </a>
-
-  <a th:if="${#request.isUserInRole('ROLE_TEACHER') || #request.isUserInRole('ROLE_ADMIN') || #request.isUserInRole('ROLE_STUDENT') || #request.isUserInRole('ROLE_STUFF')}" th:href="@{/subjects/get}">Subjects </a>
-
-  <a th:if="${#request.isUserInRole('ROLE_TEACHER') || #request.isUserInRole('ROLE_ADMIN') || #request.isUserInRole('ROLE_STUDENT') || #request.isUserInRole('ROLE_STUFF')}" > &nbsp; | &nbsp; </a>
-
-  <a th:if="${#request.isUserInRole('ROLE_ADMIN') || #request.isUserInRole('ROLE_STUFF')}" th:href="@{/admin}">Admin </a>
-
-    <a th:if="${#request.isUserInRole('ROLE_ADMIN') || #request.isUserInRole('ROLE_STUFF')}" > &nbsp; | &nbsp; </a>
 
   <a th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Logout</a>
 

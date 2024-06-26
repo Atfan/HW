@@ -46,10 +46,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().mvcMatchers("/userInfo")
                 .access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_CUSTOMER', 'ROLE_MANAGER', 'ROLE_DEFAULT')");
 
-        http.authorizeRequests().mvcMatchers("/userInfo", "/studentsInGroup", "/studentsGroups/choiceGroup")
+        http.authorizeRequests().mvcMatchers("/userInfo")
                 .access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_CUSTOMER', 'ROLE_MANAGER')");
 
-        List<Endpoints> endpoints = Endpoints.getEndpointForAdminStuff();
+        List<Endpoints> endpoints = Endpoints.getEndpointForAdminManager();
 
         for (var endpoint : endpoints) {
             http.authorizeRequests().mvcMatchers(endpoint.getEndpoint())

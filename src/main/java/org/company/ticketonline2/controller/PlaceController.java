@@ -114,7 +114,7 @@ public class PlaceController {
 
         return "deletePlace";    }
 
-    @GetMapping(value = "/createPlace")
+    @RequestMapping(value = "/createPlace", method= RequestMethod.GET)
     public String createPlacePage(Model model, Principal principal) {
 
         User loginedUser = (User) ((Authentication) principal).getPrincipal();
@@ -130,7 +130,7 @@ public class PlaceController {
         return "createPlace";
     }
 
-    @GetMapping(value = "/updatePlace")
+    @RequestMapping(value = "/updatePlace", method= RequestMethod.GET)
     public String updatePlacePage(Model model, Principal principal) {
         model.addAttribute("places", placeService.toList());
 
@@ -147,7 +147,7 @@ public class PlaceController {
         return "updatePlace";
     }
 
-    @GetMapping(value = "/deletePlace")
+    @RequestMapping(value = "/deletePlace", method= RequestMethod.GET)
     public String deletePlacePage(Model model, Principal principal) {
         model.addAttribute("places", placeService.toList());
 
