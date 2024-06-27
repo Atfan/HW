@@ -6,8 +6,8 @@ import org.company.ticketonline2.dto.TicketPackDTO;
 import org.company.ticketonline2.model.Event;
 import org.company.ticketonline2.model.Ticket;
 import org.company.ticketonline2.service.eventservice.EventService;
-import org.company.ticketonline2.service.mapper.EventMapper;
-import org.company.ticketonline2.service.mapper.TicketMapper;
+import org.company.ticketonline2.service.mapper.EventMapperImpl;
+import org.company.ticketonline2.service.mapper.TicketMapperImpl;
 import org.company.ticketonline2.service.ticketservice.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,18 +24,14 @@ public class EventDTOServiceImpl implements EventDTOService {
     @Autowired
     TicketService ticketService;
 
-    private EventMapper eventMapper;
-
-    private TicketMapper ticketMapper;
-
     @Override
     public void addEventDTO(EventDTO eventDTO) {
-        Event event = eventMapper.toEntity(eventDTO);
+        Event event = EventMapperImpl.toEntity(eventDTO);
         eventService.save(event);
         // Create tickets based on the TicketPackDTO
         List<Ticket> tickets = new ArrayList<>();
         for (TicketPackDTO pack : eventDTO.getTickets()) {
-            tickets.addAll(ticketMapper.toEntity(pack));
+            tickets.addAll(TicketMapperImpl.toEntity(pack));
         }
         tickets.forEach(ticket -> ticket.setEvent(event));
         ticketService.saveToList(tickets);
@@ -43,27 +39,27 @@ public class EventDTOServiceImpl implements EventDTOService {
 
     @Override
     public void updateEventDTO(EventDTO eventDTO) {
-        Event event = eventMapper.toEntity(eventDTO);
+        Event event = EventMapperImpl.toEntity(eventDTO);
         eventService.update(event);
     }
 
     @Override
     public void deleteEventDTO(EventDTO eventDTO) {
-        Event event = eventMapper.toEntity(eventDTO);
+        Event event = EventMapperImpl.toEntity(eventDTO);
         eventService.delete(event);
     }
 
     @Override
     public EventDTO getEventDTOById(long id) {
         Event event = eventService.findById(id);
-        return eventMapper.toDto(event);
+        return EventMapperImpl.toDto(event);
     }
 
     @Override
     public List<EventDTO> getAllEventDTO() {
         List<Event> events = eventService.toList();
         return events.stream()
-                .map(eventMapper::toDto)
+                .map(EventMapperImpl::toDto)
                 .collect(Collectors.toList());
     }
 
@@ -88,7 +84,7 @@ public class EventDTOServiceImpl implements EventDTOService {
         List<Ticket> tickets = ticketService.findById(id).getEvent().getTickets();
 
         return tickets.stream()
-                .map(ticketMapper::toTicketDTO)  // Преобразование каждого Ticket в TicketDTO
+                .map(TicketMapperImpl::toTicketDTO)  // Преобразование каждого Ticket в TicketDTO
                 .collect(Collectors.toList());
     }
 }

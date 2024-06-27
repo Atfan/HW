@@ -5,10 +5,7 @@
     <title> Update Group </title>
 </head>
 <body>
-<div th:fragment="content" th:with="roles=${roles}">
-    <!-- Вставка фрагмента -->
-    <div th:replace="/fragments/menu :: fragmentContent"></div>
-</div>
+<th:block th:include="/fragments/menu"></th:block>
 
 <div th:fragment="content" th:with="roles=${roles}">
     <!-- Вставка фрагмента -->

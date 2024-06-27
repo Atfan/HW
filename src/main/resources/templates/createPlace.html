@@ -5,15 +5,7 @@
     <title> Create Place </title>
 </head>
 <body>
-<div th:fragment="content" th:with="roles=${roles}">
-    <!-- Вставка фрагмента -->
-    <div th:replace="/fragments/menu :: fragmentContent"></div>
-</div>
-
-<div th:fragment="content" th:with="roles=${roles}">
-    <!-- Вставка фрагмента -->
-    <div th:replace="/fragments/menu1 :: fragmentContent1"></div>
-</div>
+<th:block th:include="/fragments/menu"></th:block>
 
 
 <h3>Enter place name:</h3>

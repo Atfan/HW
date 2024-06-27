@@ -2,52 +2,62 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title> Create Group </title>
+    <title>Create Event</title>
+    <script type="text/javascript">
+        function addTicketPack() {
+            const container = document.getElementById('ticketPacksContainer');
+            const index = container.childElementCount;
+
+            const newTicketPack = document.createElement('div');
+            newTicketPack.innerHTML = `
+                <input type="number" th:field="eventDTO.tickets[${index}].count" placeholder="Number of tickets" required/>
+                <input type="number" th:field="eventDTO.tickets[${index}].cost" placeholder="Cost per ticket" step="0.01" required/>
+            `;
+            container.appendChild(newTicketPack);
+        }
+    </script>
 </head>
 <body>
-<div th:fragment="content" th:with="roles=${roles}">
-    <!-- Вставка фрагмента -->
+<th:block th:include="fragments/menu"></th:block>
 
-    <th:block th:include="/fragments/menu"></th:block>
-</div>
-
-<div th:fragment="content" th:with="roles=${roles}">
-    <!-- Вставка фрагмента -->
-
-    <th:block th:include="/fragments/menu1"></th:block>
-</div>
-
-
-<h3>Enter course name:</h3>
-<form name='createGroup' th:action="@{/events/create}" method='POST'>
+<h3>Enter event's details:</h3>
+<form th:action="@{/events/create}" method="post">
     <table>
         <tr>
             <td>Event Name:</td>
-            <td><input type='text' name='eventName' value=''></td>
+            <td><input type="text" th:field="*{eventDTO.eventName}" required/></td>
         </tr>
         <tr>
             <td>Place Name:</td>
-            <td> <select name="placeDTO">
-                <option th:each="placeDTO : ${placeDTOs}"
-                        th:value="${placeDTO}"
-                        th:text="${placeDTO.getPlaceName()}">
-                    ...</option>
-            </select></td>
+            <td>
+                <select th:field="*{eventDTO.place.id}" required>
+                    <option th:each="placeDTO : ${placeDTOs}"
+                            th:value="${placeDTO.id}"
+                            th:text="${placeDTO.placeName}">
+                    </option>
+                </select>
+            </td>
         </tr>
         <tr>
-            <td>Event date:</td>
-            <td><input type='date' name='dateEvent' value=''></td>
+            <td>Event Date:</td>
+            <td><input type="date" th:field="*{eventDTO.date}" required/></td>
         </tr>
         <tr>
-            <td>Event tickets:</td>
-            <td><input type='text' name='tickets' value=''></td>
+            <td>Tickets:</td>
+            <td id="ticketPacksContainer">
+                <div>
+                    <input type="number" th:field="*{eventDTO.tickets[0].count}" placeholder="Number of tickets" required/>
+                    <input type="number" th:field="*{eventDTO.tickets[0].cost}"  placeholder="Cost per ticket" step="0.01" required/>
+                </div>
+            </td>
         </tr>
         <tr>
-            <td><input name="submit" type="submit" value="submit"/></td>
+            <td colspan="2"><button type="button" onclick="addTicketPack()">Add another ticket pack</button></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Submit" /></td>
         </tr>
     </table>
 </form>
-
 </body>
-
 </html>

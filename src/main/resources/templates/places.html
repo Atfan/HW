@@ -7,10 +7,11 @@
 <body>
 <th:block th:include="/fragments/menu"></th:block>
 
-    <div th:if="${roles.contains('ROLE_ADMIN') || roles.contains('ROLE_MANAGER')}">
+
+    <div th:if="${#request.isUserInRole('ROLE_MANAGER') || #request.isUserInRole('ROLE_ADMIN')}">
 
 
-        <th:block th:include="/fragments/menu1"></th:block>
+        <a th:href="@{/createPlace}">Create </a>
     </div>
 
 <table border = "1">

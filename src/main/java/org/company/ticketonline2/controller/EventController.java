@@ -1,5 +1,6 @@
 package org.company.ticketonline2.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.company.ticketonline2.dto.EventDTO;
 import org.company.ticketonline2.dto.PlaceDTO;
 import org.company.ticketonline2.dto.TicketPackDTO;
@@ -7,25 +8,27 @@ import org.company.ticketonline2.model.Event;
 import org.company.ticketonline2.model.Place;
 import org.company.ticketonline2.service.eventdtoservice.EventDTOService;
 import org.company.ticketonline2.service.eventservice.EventService;
+import org.company.ticketonline2.service.mapper.MyMapperPlace;
 import org.company.ticketonline2.service.mapper.PlaceMapper;
 import org.company.ticketonline2.service.placeservice.PlaceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+@Slf4j
 @Controller
 public class EventController {
 
@@ -40,18 +43,6 @@ public class EventController {
     @RequestMapping(value = "/events", method= RequestMethod.GET)
     public String listEvent(Model model, Principal principal){
         model.addAttribute("events", eventService.toList());
-
-        User loginedUser = (User) ((Authentication) principal).getPrincipal();
-
-        Collection<GrantedAuthority> authorities = loginedUser.getAuthorities();
-        StringBuilder roles = new StringBuilder();
-        for (GrantedAuthority authority : authorities) {
-            roles.append(authority.getAuthority());
-        }
-
-        model.addAttribute("create","/createEvent");
-        model.addAttribute("roles", roles.toString());
-
         return "events";
     }
 
@@ -70,58 +61,21 @@ public class EventController {
 
         model.addAttribute("events", eventService.toList());
 
-        User loginedUser = (User) ((Authentication) principal).getPrincipal();
-
-        Collection<GrantedAuthority> authorities = loginedUser.getAuthorities();
-        StringBuilder roles = new StringBuilder();
-        for (GrantedAuthority authority : authorities) {
-            roles.append(authority.getAuthority());
-        }
-
-        model.addAttribute("roles", roles.toString());
-
-        return "updateEvent";
+        return "redirect:/events";
     }
 
-    @RequestMapping(value = "/events/create", method = RequestMethod.POST)
-    public String createGroup(
-                                @RequestParam("nameEvent") String nameEvent,
-                                @RequestParam("placeEvent") PlaceDTO placeEvent,
-                                @RequestParam("dateEvent") Date dateEvent,
-                                @RequestParam("tickets") List<TicketPackDTO> tickets,
-                                Model model, Principal principal) {
-        EventDTO addEvent = new EventDTO();
-        addEvent.setEventName(nameEvent);
-        addEvent.setPlace(placeEvent);
-        addEvent.setDate(dateEvent);
-        addEvent.setTickets(tickets);
-        eventDTOService.addEventDTO(addEvent);
+    @RequestMapping(value = "/events/create")
+    public String createGroup(@ModelAttribute EventDTO eventDTO) {
 
-        User loginedUser = (User) ((Authentication) principal).getPrincipal();
+        log.info("eventDTO={}",
+                eventDTO.toString());
 
-        Collection<GrantedAuthority> authorities = loginedUser.getAuthorities();
-        StringBuilder roles = new StringBuilder();
-        for (GrantedAuthority authority : authorities) {
-            roles.append(authority.getAuthority());
-        }
+        eventDTOService.addEventDTO(eventDTO);
 
-        List<Place> places=placeService.toList();
-        List<PlaceDTO> placeDTOs=new ArrayList<>();
-        for(Place place:places){
-            PlaceDTO placeDTO=new PlaceDTO();
-            placeDTO.setId(place.getId());
-            placeDTO.setPlaceName(place.getName());
-            placeDTO.setAddress(place.getAddress());
-            placeDTOs.add(placeDTO);
-        }
-
-        model.addAttribute("placeDTOs", placeDTOs);
-        model.addAttribute("roles", roles.toString());
-
-        return "createEvent";
+        return "redirect:/events";
     }
 
-    @RequestMapping(value = "/events/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/events/delete", method = RequestMethod.DELETE)
     public String deleteGroup(@RequestParam("idEvent") Long idEvent,Model model,
                               Principal principal) {
         Event delEvent = eventService.findById(idEvent);
@@ -129,78 +83,37 @@ public class EventController {
            eventService.delete(delEvent);
         }
 
-
-        model.addAttribute("events", eventService.toList());
-
-        User loginedUser = (User) ((Authentication) principal).getPrincipal();
-
-        Collection<GrantedAuthority> authorities = loginedUser.getAuthorities();
-        StringBuilder roles = new StringBuilder();
-        for (GrantedAuthority authority : authorities) {
-            roles.append(authority.getAuthority());
-        }
-
-        model.addAttribute("roles", roles.toString());
-
-        return "deleteEvent";    }
+        return "redirect:/events";    }
 
     @RequestMapping(value = "/createEvent", method= RequestMethod.GET)
     public String createGroupPage(Model model, Principal principal) {
 
-        User loginedUser = (User) ((Authentication) principal).getPrincipal();
-
-        Collection<GrantedAuthority> authorities = loginedUser.getAuthorities();
-        StringBuilder roles = new StringBuilder();
-        for (GrantedAuthority authority : authorities) {
-            roles.append(authority.getAuthority());
-        }
+        model.addAttribute("eventDTO", new EventDTO());
 
         List<Place> places=placeService.toList();
         List<PlaceDTO> placeDTOs=new ArrayList<>();
         for(Place place:places){
-            PlaceDTO placeDTO=new PlaceDTO();
-            placeDTO.setId(place.getId());
-            placeDTO.setPlaceName(place.getName());
-            placeDTO.setAddress(place.getAddress());
-            placeDTOs.add(placeDTO);
+           placeDTOs.add(MyMapperPlace.toDTO(placeService.findById(place.getId())));
         }
-        model.addAttribute("create","/createEvent");
         model.addAttribute("placeDTOs", placeDTOs);
-        model.addAttribute("roles", roles.toString());
+
 
         return "createEvent";
     }
 
     @RequestMapping(value = "/updateEvent",method= RequestMethod.GET)
     public String updateGroupPage(Model model, Principal principal) {
+
         model.addAttribute("events", eventService.toList());
 
-        User loginedUser = (User) ((Authentication) principal).getPrincipal();
-
-        Collection<GrantedAuthority> authorities = loginedUser.getAuthorities();
-        StringBuilder roles = new StringBuilder();
-        for (GrantedAuthority authority : authorities) {
-            roles.append(authority.getAuthority());
-        }
-
-        model.addAttribute("roles", roles.toString());
 
         return "updateEvent";
     }
 
     @RequestMapping(value = "/deleteEvent", method= RequestMethod.GET)
     public String deleteGroupPage(Model model, Principal principal) {
+
         model.addAttribute("events", eventService.toList());
-
-        User loginedUser = (User) ((Authentication) principal).getPrincipal();
-
-        Collection<GrantedAuthority> authorities = loginedUser.getAuthorities();
-        StringBuilder roles = new StringBuilder();
-        for (GrantedAuthority authority : authorities) {
-            roles.append(authority.getAuthority());
-        }
-
-        model.addAttribute("roles", roles.toString());
 
         return "deleteEvent";
     }

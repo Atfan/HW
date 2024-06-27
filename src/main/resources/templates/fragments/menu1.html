@@ -1,8 +1,0 @@
-<div xmlns:th="http://www.thymeleaf.org"
-     style="border: 1px solid #ccc;padding:5px;margin-bottom:20px;">
-
-
-  <a th:if="${#request.isUserInRole('ROLE_MANAGER') || #request.isUserInRole('ROLE_ADMIN')}" th:href="${create}">Create </a>
-
-  <a th:if="${#request.isUserInRole('ROLE_STUFF')}" > &nbsp; | &nbsp; </a>
-</div>

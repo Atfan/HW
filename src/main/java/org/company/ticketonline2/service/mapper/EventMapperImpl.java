@@ -9,16 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class EventMapperImpl implements EventMapper {
+public class EventMapperImpl {
 
-    PlaceMapper placeMapper;
 
-    @Override
-    public Event toEntity(EventDTO dto) {
+    public static Event toEntity(EventDTO dto) {
         Event event = new Event();
         event.setId(dto.getId());
         event.setName(dto.getEventName());
-        event.setPlace(placeMapper.toEntity(dto.getPlace()));
+        event.setPlace(MyMapperPlace.toPlace(dto.getPlace()));
         List<Ticket> tickets = new ArrayList<>();
         long idTck=0;
         for(int i=0;i<dto.getTickets().size();i++) {
@@ -36,13 +34,12 @@ public class EventMapperImpl implements EventMapper {
         return event;
     }
 
-    @Override
-    public EventDTO toDto(Event entity) {
+    public static EventDTO toDto(Event entity) {
         EventDTO dto = new EventDTO();
         dto.setId(entity.getId());
         dto.setEventName(entity.getName());
         dto.setDate(entity.getDate());
-        dto.setPlace(placeMapper.toDto(entity.getPlace()));
+        dto.setPlace(MyMapperPlace.toDTO(entity.getPlace()));
 
         List<TicketPackDTO> ticketPacks = entity.getTickets().stream()
                 .collect(Collectors.groupingBy(Ticket::getCost))

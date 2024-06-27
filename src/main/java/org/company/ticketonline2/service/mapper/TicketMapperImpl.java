@@ -7,10 +7,8 @@ import org.company.ticketonline2.model.Ticket;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TicketMapperImpl implements TicketMapper {
-    EventMapper eventMapper;
-    @Override
-    public List<Ticket> toEntity(TicketPackDTO dto) {
+public class TicketMapperImpl {
+    public static List<Ticket> toEntity(TicketPackDTO dto) {
         List<Ticket> tickets = new ArrayList<>();
         for (int i = 0; i < dto.getCount(); i++) {
             Ticket ticket = new Ticket();
@@ -21,8 +19,8 @@ public class TicketMapperImpl implements TicketMapper {
         return tickets;
     }
 
-    @Override
-    public TicketPackDTO toDto(List<Ticket> entity) {
+
+    public static TicketPackDTO toDto(List<Ticket> entity) {
         if (entity.isEmpty()) {
             return new TicketPackDTO(0, 0);
         }
@@ -31,8 +29,8 @@ public class TicketMapperImpl implements TicketMapper {
         return new TicketPackDTO(cost, count);
     }
 
-    @Override
-    public TicketDTO toTicketDTO(Ticket ticket) {
+
+    public static TicketDTO toTicketDTO(Ticket ticket) {
         if (ticket == null) {
             return null;
         }
@@ -41,13 +39,13 @@ public class TicketMapperImpl implements TicketMapper {
         dto.setCost(ticket.getCost());
         dto.setNumbr(ticket.getNumbr());
         dto.setCustomer(ticket.getCustomer() != null ? ticket.getCustomer() : null);
-        dto.setEvent(eventMapper.toDto(ticket.getEvent() != null ? ticket.getEvent() : null));
+        dto.setEvent(EventMapperImpl.toDto(ticket.getEvent() != null ? ticket.getEvent() : null));
         dto.setStatus(ticket.getStatus());
         return dto;
     }
 
-    @Override
-    public Ticket toTicket(TicketDTO ticketDTO) {
+
+    public static Ticket toTicket(TicketDTO ticketDTO) {
         if (ticketDTO == null) {
             return null;
         }
