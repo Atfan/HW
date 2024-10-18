@@ -6,12 +6,12 @@
     <script type="text/javascript">
         function addTicketPack() {
             const container = document.getElementById('ticketPacksContainer');
-            const index = container.childElementCount;
+            const index = container.children.length; // Get current number of child elements
 
             const newTicketPack = document.createElement('div');
             newTicketPack.innerHTML = `
-                <input type="number" th:field="eventDTO.tickets[${index}].count" placeholder="Number of tickets" required/>
-                <input type="number" th:field="eventDTO.tickets[${index}].cost" placeholder="Cost per ticket" step="0.01" required/>
+                <input type="number" th:field="*{eventDTO.tickets[${index}].count}" placeholder="Number of tickets" required/>
+                <input type="number" th:field="*{eventDTO.tickets[${index}].cost}" placeholder="Cost per ticket" step="0.01" required/>
             `;
             container.appendChild(newTicketPack);
         }
@@ -45,6 +45,7 @@
         <tr>
             <td>Tickets:</td>
             <td id="ticketPacksContainer">
+                <!-- Initial ticket pack -->
                 <div>
                     <input type="number" th:field="*{eventDTO.tickets[0].count}" placeholder="Number of tickets" required/>
                     <input type="number" th:field="*{eventDTO.tickets[0].cost}"  placeholder="Cost per ticket" step="0.01" required/>
